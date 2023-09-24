@@ -1,8 +1,14 @@
-import React from 'react'
-
+import React from 'react';
+import "./Landing.css";
 function Landing() {
   return (
-    <div>Landing</div>
+    // <div className='landing'>
+      <div className='landing__logo'>
+      <p className='landing__log_txt'>
+        Toilet Is
+        Right There
+      </p>
+      </div>
   )
 }
 
