@@ -8,7 +8,9 @@
     "client": "cd client && npm run start",
     "client-test": "cd client && npm run test",
     "backend-test": "mocha --require ts-node/register test/**/*.ts",
-    "ts-node": "./node_modules/.bin/ts-node"
+    "ts-node": "./node_modules/.bin/ts-node",
+    "migration": "knex migrate:latest",
+    "seed": "knex  seed:run"
   },
   "author": "",
   "license": "ISC",
