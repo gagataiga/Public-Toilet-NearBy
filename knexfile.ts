@@ -1,12 +1,28 @@
 import type { Knex } from "knex";
+const path = require("path");
 
-// Update with your config settings.
+require("dotenv").config({
+  path: path.join(__dirname, './.env')
+});
+
+const PORT: number = Number(process.env.PORT) || 5432;
 
 const config: { [key: string]: Knex.Config } = {
   development: {
-    client: "sqlite3",
+    client: "pg",
     connection: {
-      filename: "./dev.sqlite3"
+      host: process.env.DB_HOST || "127.0.0.1",
+      port: PORT,
+      database: process.env.DB_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+    },
+    migrations: { 
+      tableName: 'knex_migrations',
+      directory: __dirname + "/db/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/db/seeds",
     }
   },
 
@@ -37,8 +53,12 @@ const config: { [key: string]: Knex.Config } = {
       min: 2,
       max: 10
     },
-    migrations: {
-      tableName: "knex_migrations"
+    migrations: { 
+      tableName: 'knex_migrations',
+      directory: __dirname + "/db/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/db/seeds",
     }
   }
 
