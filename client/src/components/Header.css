@@ -1,17 +1,47 @@
 .header{
   background-color: #E8FFCE;
-  border: 4px solid rgb(47, 0, 255);
+  top:0;
+  left: 0;
   height: 90px;
   display: flex;
-  justify-content: space-between; /* 子要素を左右に配置 */
-  align-items: center; /* 子要素を垂直方向に中央に配置 */
+  justify-content: space-between; 
+  align-items: center; 
 }
 
 .header__item_title{
-  border: 2px solid red;
   margin-left: 30px;
+  margin-left: 20x;
 }
 
-.header__item_nav{
-  border: 3px solid pink;
+.header__nav_menu{
+  border: 3px solid rgb(27, 240, 12);
+  background-color: rgba(241, 1, 1, 0.537);
+}
+
+.nav__button_container{
+  border: 3px solid rgb(0, 60, 255);
+  margin-right: 10px;
+  height: 50px;
+}
+
+.nav__items_container{
+  position: fixed;
+  top: 90px;
+  right: -150px;
+  width: 150px;
+  height: 100%;
+  background-color: #E8FFCE;
+  transition: right 0.8s ease;
+}
+
+.nav__items_container.open {
+  right: 0; 
+}
+
+.nav__items{
+  list-style: none;
+}
+
+.nav__item{
+  margin-bottom: 10px;
 }
