@@ -16,7 +16,7 @@ function App() {
         <Route path='/landing' element={<Landing />} />
         <Route path='/' element={<Home />} />
       </Routes>
-      <Footer />
+    <Footer />
     </div>
   );
 }
