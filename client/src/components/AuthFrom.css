@@ -1,0 +1,41 @@
+.form__container{
+  text-align: center;
+  border: 1px solid black;
+  width: 80%;
+  margin: auto;
+  margin-top: 40px;
+  border-radius: 5%;
+}
+
+.form{
+  margin: auto;
+  padding: 10px;
+}
+
+.auth-change{
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form__fields{
+  margin-top: 15px;
+}
+
+.form__fields:last-of-type{
+  margin-top: 25px;
+}
+
+.auth-change__btn{
+  background-color: transparent;
+  border: none;
+  color: blue;
+}
+
+#submit__btn{
+  width: 250px;
+  background-color: #7C73C0;
+}
+
+#email , #password , #name{
+  width: 250px;
+}

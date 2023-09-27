@@ -1,8 +1,9 @@
 import React from 'react'
+import AuthForm from '../components/AuthForm'
 
 function Auth() {
   return (
-    <div>Auth</div>
+    <AuthForm/>
   )
 }
 
