@@ -44,6 +44,7 @@
 .nav__items_container.open {
   right: 0; 
   background-color: #E8FFCE;;
+  z-index: 999;
 }
 
 .nav__items{
