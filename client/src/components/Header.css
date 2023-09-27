@@ -1,17 +1,58 @@
 .header{
   background-color: #E8FFCE;
-  border: 4px solid rgb(47, 0, 255);
+  top:0;
+  left: 0;
   height: 90px;
   display: flex;
-  justify-content: space-between; /* 子要素を左右に配置 */
-  align-items: center; /* 子要素を垂直方向に中央に配置 */
+  justify-content: space-between; 
+  align-items: center; 
 }
 
 .header__item_title{
-  border: 2px solid red;
   margin-left: 30px;
+  margin-left: 20x;
 }
 
-.header__item_nav{
-  border: 3px solid pink;
+.nav__button_container{
+  display: flex;
+  flex-direction: column;
+  margin-right: 15px;
 }
+
+.nav__button{
+  cursor: pointer;
+  width: 45px;
+  height: 45px;
+  border: 2px solid black;
+  border-radius: 25%;
+}
+
+.nav__items_container{
+  position: fixed;
+  top: 80px;
+  right: -170px;
+  width: 170px;
+  height: 100%;
+  background-color: transparent; /* 最初は透明に設定 */
+  transition: right 1s ease,background-color 1s ease;
+}
+
+.nav__items_container.open {
+  right: 0; 
+  background-color: #E8FFCE;;
+}
+
+.nav__items{
+  list-style: none;
+  font-size: 30px;
+}
+
+.nav__item{
+  margin-bottom: 15px;
+}
+
+.nav__item_link {
+  color: #7C73C0;
+  font-weight: 500;
+}
+
