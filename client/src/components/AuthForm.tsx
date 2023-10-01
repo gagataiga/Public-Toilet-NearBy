@@ -3,8 +3,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./AuthFrom.css";
-import { RootState, AppDispatch } from '../redux/store';
-import {signIn, signUp, } from '../redux/authSlice';
+import { signIn, signUp } from '../redux/authSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
 function AuthForm(){
@@ -45,8 +44,6 @@ function AuthForm(){
     }
   }
 
-  const user = useAppSelector((state: RootState) => state);
-  
   return (
     <div className='form__container'>
     <Box component="form" className='form' onSubmit={handleSubmit}>
