@@ -4,14 +4,14 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./AuthFrom.css";
 import { RootState, AppDispatch } from '../redux/store';
-import {signIn, watchAuthState} from '../redux/authSlice';
+import {signIn, signUp, } from '../redux/authSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
 function AuthForm(){
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [email, setEmail] = useState<string>("hoge@gmail.com");
+  const [password, setPassword] = useState<string>("hogehoge");
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("");
+  const [userName, setUserName] = useState<string>("hoge");
 
   const dispatch = useAppDispatch();
 
@@ -35,11 +35,18 @@ function AuthForm(){
 
   const handleSubmit = async(e: any) => { 
     e.preventDefault();
-    dispatch(signIn(email,password));
+
+    if (isSignUp) {
+      // signup
+      dispatch(signUp(email, password, userName));
+    } else {
+      // signIn
+      dispatch(signIn(email,password));
+    }
   }
 
   const user = useAppSelector((state: RootState) => state);
-  console.log(user);
+  
   return (
     <div className='form__container'>
     <Box component="form" className='form' onSubmit={handleSubmit}>

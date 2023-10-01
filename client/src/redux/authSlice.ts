@@ -5,15 +5,35 @@ import { User } from "./types";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut as firebaseSignOut, onAuthStateChanged} from "firebase/auth";
 import { auth } from "../firebase.conf";
 
+
 export const signIn = (email: string, password: string) => { 
-  console.log(email,password);
+
   return async (dispatch: Dispatch) => { 
     try {
-      console.log("これからサインインを試みます");
       const loggedIn = await signInWithEmailAndPassword(auth, email, password);
+      // call user info api from backend
       dispatch(setUserAuth({
         uid: loggedIn.user.uid,
-        name: "hoge",
+        name: "after",
+        email: email,
+        isLogined: true
+      }));
+    } catch (error) {
+      console.log(error);
+      alert("user login is not suceedd")
+    }
+  }
+}
+
+export const signUp = (email:string, password:string, userName:string) => { 
+  return async (dispatch: Dispatch) => { 
+    try {
+      const newUser = await createUserWithEmailAndPassword(auth, email, password);
+      // call user info api from backend
+      console.log(newUser);
+      dispatch(setUserAuth({
+        uid: newUser.user.uid,
+        name: "after",
         email: email,
         isLogined: true
       }));
@@ -35,9 +55,6 @@ export const watchAuthState = () => async (dispatch:Dispatch) => {
   return unsubscribe;
 };
 
-export const signUp = (email:string, password:string) => { 
-
-}
 
 export const signOut = () => { 
 
