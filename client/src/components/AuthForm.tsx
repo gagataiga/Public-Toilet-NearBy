@@ -1,15 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import "./AuthFrom.css";
+import { RootState, AppDispatch } from '../redux/store';
+import {signIn, watchAuthState} from '../redux/authSlice';
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
 
 function AuthForm(){
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
   const [userName, setUserName] = useState<string>("");
-  
+
+  const dispatch = useAppDispatch();
+
   const authMessages: { tologin: string, toSignUp: string, login:string,signUp:string } =
   {
     tologin: "Already have an account? Go to login",
@@ -20,17 +25,24 @@ function AuthForm(){
 
   const handleAuthForm = ():void => { 
     setIsSignUp(!isSignUp);
-
   } 
 
+  // handle input fields
   const handleFields = (e:any, setForm:React.Dispatch<React.SetStateAction<string>>):void => { 
     const { value } = e.target;
     setForm(value);
   }
 
+  const handleSubmit = async(e: any) => { 
+    e.preventDefault();
+    dispatch(signIn(email,password));
+  }
+
+  const user = useAppSelector((state: RootState) => state);
+  console.log(user);
   return (
     <div className='form__container'>
-    <Box component="form" className='form' >
+    <Box component="form" className='form' onSubmit={handleSubmit}>
       <div className='form__fields'>
           <TextField id="email" label="Email" variant="standard" value={email} onChange={e => { handleFields(e,setEmail) }} />
       </div>
@@ -44,7 +56,7 @@ function AuthForm(){
           </div>
           )}
       <div className='form__fields'>
-          <Button variant="contained" id='submit__btn'>
+          <Button type="submit" variant="contained" id='submit__btn'>
           {isSignUp ? authMessages.signUp : authMessages.login}
         </Button>
       </div>
