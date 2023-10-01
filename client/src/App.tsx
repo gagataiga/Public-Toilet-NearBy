@@ -15,7 +15,6 @@ function App() {
   const user = useAppSelector(state => state);
   useEffect(() => {
     dispatch(watchAuthState);
-    
   },[]);
   console.log(user);
   return (
