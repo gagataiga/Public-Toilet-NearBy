@@ -19,7 +19,7 @@ export const signIn = (email: string, password: string) => {
         isLogined: true
       }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert("user login is not suceedd")
     }
   }
@@ -30,7 +30,6 @@ export const signUp = (email:string, password:string, userName:string) => {
     try {
       const newUser = await createUserWithEmailAndPassword(auth, email, password);
       // call user info api from backend
-      console.log(newUser);
       dispatch(setUserAuth({
         uid: newUser.user.uid,
         name: "after",
@@ -38,7 +37,7 @@ export const signUp = (email:string, password:string, userName:string) => {
         isLogined: true
       }));
     } catch (error) {
-      console.log(error);
+      console.error(error);
       alert("user login is not suceedd")
     }
   }

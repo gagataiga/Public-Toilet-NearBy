@@ -16,7 +16,7 @@ function App() {
   useEffect(() => {
     dispatch(watchAuthState);
   },[]);
-  console.log(user);
+
   return (
     <div className="App">
       <Header />
