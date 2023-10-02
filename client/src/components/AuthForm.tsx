@@ -13,7 +13,7 @@ function AuthForm(){
   const [userName, setUserName] = useState<string>("hoge");
 
   const dispatch = useAppDispatch();
-
+  
   const authMessages: { tologin: string, toSignUp: string, login:string,signUp:string } =
   {
     tologin: "Already have an account? Go to login",
@@ -44,7 +44,7 @@ function AuthForm(){
       dispatch(signIn(email,password));
     }
   }
-
+  
   return (
     <div className='form__container'>
     <Box component="form" className='form' onSubmit={handleSubmit}>

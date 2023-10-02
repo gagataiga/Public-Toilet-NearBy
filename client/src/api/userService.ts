@@ -11,11 +11,11 @@ export const getUserInfo = async(fb_uid: string) => {
     }
 }
 
-export const saveUserInfo = async (user: UserInfo) => {
-    console.log(user);
+export const register = async (user: UserInfo) => {
     try {
       const response = await axios.post(`${apiUrl}users/auth`, user);
-      return response;
+      console.log(response.data.user_id);
+      return response.data.user_id;
     } catch (error) {
       console.error(error);
     }

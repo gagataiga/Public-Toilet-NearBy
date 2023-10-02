@@ -4,7 +4,8 @@ import { Dispatch } from "redux";
 import { User } from "./types";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut as firebaseSignOut, onAuthStateChanged} from "firebase/auth";
 import { auth } from "../firebase.conf";
-import { saveUserInfo } from "../api/userService";
+import { register } from "../api/userService";
+import { UserInfo } from "../common/types";
 
 export const signIn = (email: string, password: string) => { 
 
@@ -13,7 +14,7 @@ export const signIn = (email: string, password: string) => {
       const loggedIn = await signInWithEmailAndPassword(auth, email, password);
       // call user info api from backend
       dispatch(setUserAuth({
-        uid: loggedIn.user.uid,
+        uid: 1,//仮
         name: "after",
         email: email,
         isLogined: true
@@ -31,20 +32,26 @@ export const signUp = (email:string, password:string, userName:string) => {
 
       const newUser = await createUserWithEmailAndPassword(auth, email, password);
       
-      const user = {
-        uid: newUser.user.uid,
+      const user:UserInfo = {
+        fb_uid: newUser.user.uid,
         email: email,
         password: password,
-        name: userName
+        username: userName
       }
 
-      const response = await saveUserInfo(user);
-      console.log("レスポンスだよ",response);
+      const uid:number = await register(user);
+      console.log("レスポンスだよ",uid);
       console.log("dispatchするよ");
+      console.log({
+        uid: uid,
+        name: userName,
+        email: email,
+        isLogined: true
+       });
       
        dispatch(setUserAuth({
-        uid: newUser.user.uid,
-        name: "after",
+        uid: uid,
+        name: userName,
         email: email,
         isLogined: true
        }));
@@ -91,7 +98,7 @@ export const authSlice = createSlice({
     clearUser: (state, action: PayloadAction<User>) => { 
       // everything should be clear
       return {
-        uid: "",
+        uid: 0,
         name: "",
         email: "",
         isLogined: false,

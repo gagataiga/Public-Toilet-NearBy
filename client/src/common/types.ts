@@ -5,8 +5,8 @@ export interface NavLink {
 }
 
 export interface UserInfo { 
-  uid: string,
+  fb_uid: string,
   email: string,
   password: string,
-  name: string
+  username: string
 }
