@@ -38,6 +38,7 @@ function AuthForm(){
     if (isSignUp) {
       // signup
       dispatch(signUp(email, password, userName));
+
     } else {
       // signIn
       dispatch(signIn(email,password));

@@ -4,7 +4,7 @@ import { Dispatch } from "redux";
 import { User } from "./types";
 import { createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut as firebaseSignOut, onAuthStateChanged} from "firebase/auth";
 import { auth } from "../firebase.conf";
-
+import { saveUserInfo } from "../api/userService";
 
 export const signIn = (email: string, password: string) => { 
 
@@ -28,17 +28,30 @@ export const signIn = (email: string, password: string) => {
 export const signUp = (email:string, password:string, userName:string) => { 
   return async (dispatch: Dispatch) => { 
     try {
+
       const newUser = await createUserWithEmailAndPassword(auth, email, password);
-      // call user info api from backend
-      dispatch(setUserAuth({
+      
+      const user = {
+        uid: newUser.user.uid,
+        email: email,
+        password: password,
+        name: userName
+      }
+
+      const response = await saveUserInfo(user);
+      console.log("レスポンスだよ",response);
+      console.log("dispatchするよ");
+      
+       dispatch(setUserAuth({
         uid: newUser.user.uid,
         name: "after",
         email: email,
         isLogined: true
-      }));
+       }));
+       console.log("dispatchされたよ");
     } catch (error) {
       console.error(error);
-      alert("user login is not suceedd")
+      alert("user login error")
     }
   }
 }
