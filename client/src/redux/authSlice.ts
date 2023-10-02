@@ -8,17 +8,17 @@ import { register } from "../api/userService";
 import { UserInfo } from "../common/types";
 
 export const signIn = (email: string, password: string) => { 
-
   return async (dispatch: Dispatch) => { 
     try {
       const loggedIn = await signInWithEmailAndPassword(auth, email, password);
       // call user info api from backend
       dispatch(setUserAuth({
-        uid: 1,//仮
+        uid: 0,//仮
         name: "after",
         email: email,
-        isLogined: true
+        isLoggedIn: true
       }));
+
     } catch (error) {
       console.error(error);
       alert("user login is not suceedd")
@@ -40,26 +40,18 @@ export const signUp = (email:string, password:string, userName:string) => {
       }
 
       const uid:number = await register(user);
-      console.log("レスポンスだよ",uid);
-      console.log("dispatchするよ");
-      console.log({
+
+      dispatch(setUserAuth({
         uid: uid,
         name: userName,
         email: email,
-        isLogined: true
-       });
-      
-       dispatch(setUserAuth({
-        uid: uid,
-        name: userName,
-        email: email,
-        isLogined: true
-       }));
-       console.log("dispatchされたよ");
+        isLoggedIn: true
+      }));
     } catch (error) {
       console.error(error);
       alert("user login error")
     }
+    
   }
 }
 
@@ -101,7 +93,7 @@ export const authSlice = createSlice({
         uid: 0,
         name: "",
         email: "",
-        isLogined: false,
+        isLoggedIn: false,
       }
     }
   },

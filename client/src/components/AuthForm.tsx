@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import "./AuthFrom.css";
 import { signIn, signUp } from '../redux/authSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { useNavigate } from 'react-router-dom';
 
 function AuthForm(){
   const [email, setEmail] = useState<string>("hoge@gmail.com");
@@ -13,7 +14,9 @@ function AuthForm(){
   const [userName, setUserName] = useState<string>("hoge");
 
   const dispatch = useAppDispatch();
-  
+  const userState = useAppSelector((state) => state);
+  const navigate = useNavigate();
+
   const authMessages: { tologin: string, toSignUp: string, login:string,signUp:string } =
   {
     tologin: "Already have an account? Go to login",
@@ -34,14 +37,22 @@ function AuthForm(){
 
   const handleSubmit = async(e: any) => { 
     e.preventDefault();
-
-    if (isSignUp) {
-      // signup
-      dispatch(signUp(email, password, userName));
-
-    } else {
-      // signIn
-      dispatch(signIn(email,password));
+    try {   
+      if (isSignUp) {
+        // signup
+        await dispatch(signUp(email, password, userName));
+      } else {
+        // signIn
+        await dispatch(signIn(email,password));
+      }
+      
+      //navigate when user logs in or signs up successfully
+      if (userState.isLoggedIn) { 
+        navigate("/");
+      }
+    
+    } catch (error) {
+      console.error(error);
     }
   }
   

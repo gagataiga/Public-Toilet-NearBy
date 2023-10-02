@@ -12,9 +12,9 @@ export const getUserInfo = async(fb_uid: string) => {
 }
 
 export const register = async (user: UserInfo) => {
-    try {
+  try {
+    // response => {user_id:number}
       const response = await axios.post(`${apiUrl}users/auth`, user);
-      console.log(response.data.user_id);
       return response.data.user_id;
     } catch (error) {
       console.error(error);

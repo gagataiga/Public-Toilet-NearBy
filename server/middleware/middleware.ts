@@ -10,8 +10,8 @@ export const simpleCache =  (req: Request, res: Response, next: NextFunction) =>
 export const cacheUserInfo = (req: Request, res: Response, next: NextFunction) => {
   // firebase auth uid
   console.log("cache user info");
-  const fbId = req.params.uid; 
-  console.log(fbId);
+  const fbId = req.params.firebaseId; 
+  console.log("fb",fbId);
   if (fbId) { 
     // get user info as cache data
     const cachedUser = cache.get(fbId);
