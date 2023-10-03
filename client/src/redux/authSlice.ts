@@ -60,7 +60,6 @@ export const signUp = (email:string, password:string, userName:string) => {
 }
 
 export const watchAuthState = () => async (dispatch: Dispatch) => {
-  console.log("呼ばれたよ");
   const unsubscribe = onAuthStateChanged(auth, async (user) => {
     if (user) {
       const {user_id,username,email} = await getUserInfo(user.uid);
@@ -72,7 +71,6 @@ export const watchAuthState = () => async (dispatch: Dispatch) => {
       }));
     }
   });
-  console.log(unsubscribe);
   return unsubscribe;
 };
 
