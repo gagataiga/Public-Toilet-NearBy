@@ -4,8 +4,12 @@ const USERS_TABLE: string = "users";
 module.exports = {
   USERS_TABLE,
   async getUser(fb_uid: string) { 
+    console.log(fb_uid);
     try {
-      const user = await userKnex(USERS_TABLE).where({ fb_uid }).first();
+      const user = await userKnex(USERS_TABLE)
+        .where("fb_uid", fb_uid)
+        .first()
+        .select("user_id", "username", "email");
       console.log(user);
       return user;
     } catch (error) { 

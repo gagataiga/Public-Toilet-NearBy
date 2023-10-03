@@ -43,18 +43,18 @@ function AuthForm(){
         await dispatch(signUp(email, password, userName));
       } else {
         // signIn
-        await dispatch(signIn(email,password));
+        await dispatch(signIn(email, password));
       }
-      
       //navigate when user logs in or signs up successfully
-      if (userState.isLoggedIn) { 
+      if (userState.user.isLoggedIn) { 
         navigate("/");
       }
-    
+      
     } catch (error) {
       console.error(error);
     }
   }
+  console.log(userState);
   
   return (
     <div className='form__container'>
