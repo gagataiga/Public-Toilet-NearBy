@@ -59,20 +59,20 @@ export const signUp = (email:string, password:string, userName:string) => {
   }
 }
 
-export const watchAuthState = () => async (dispatch:Dispatch) => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
+export const watchAuthState = () => async (dispatch: Dispatch) => {
+  console.log("呼ばれたよ");
+  const unsubscribe = onAuthStateChanged(auth, async (user) => {
     if (user) {
-      // ユーザーがログインしている場合、認証されたユーザーオブジェクトをRedux stateにセット
-      // apiから返されたものをここで取得
-      // dispatch(setUser(user)); 
-      
-    } else {
-      // ユーザーがログアウトしている場合、初期状態に設定して認証状態をクリア
-      // dispatch(clearUser({
-        
-      // })); 
+      const {user_id,username,email} = await getUserInfo(user.uid);
+      dispatch(setUserAuth({
+        uid: user_id,
+        name: username,
+        email: email,
+        isLoggedIn: true
+      }));
     }
   });
+  console.log(unsubscribe);
   return unsubscribe;
 };
 
