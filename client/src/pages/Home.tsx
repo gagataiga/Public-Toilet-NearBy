@@ -4,6 +4,7 @@ import { getUserInfo } from '../api/userService';
 import { auth } from '../firebase.conf';
 import { onAuthStateChanged } from "firebase/auth";
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import Map from '../components/Map';
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -38,8 +39,7 @@ function Home() {
     <div>
       <main>
         <div className='search'>search box</div>
-        
-        <div className='map'>map should be here</div>
+        <Map/>
       </main>
     </div>
   )
