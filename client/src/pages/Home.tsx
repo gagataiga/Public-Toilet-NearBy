@@ -9,10 +9,11 @@ import Map from '../components/Map';
 function Home() {
   const dispatch = useAppDispatch();
   const userState = useAppSelector(state => state.user);
-
+  
   const handleAuthStateChange = async (user: any) => { 
 
     if (user && (userState.fb_uid !== user.uid)) { 
+      console.log("user情報を取得");
       try {   
         const { user_id, username, email } = await getUserInfo(user.uid);
         dispatch(setUserAuth({
@@ -29,7 +30,6 @@ function Home() {
   }
 
   useEffect(() => {
-    console.log("ログインユーザー情報を取得");
     const unsubScribed = onAuthStateChanged(auth, handleAuthStateChange);
     return () => unsubScribed();
   }, []);

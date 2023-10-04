@@ -1,0 +1,23 @@
+.map_container {
+  height: 70vh;
+  width: auto;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  border-radius: 10px;
+  margin: 10px;
+}
+
+.skeleton-loader{
+  background: linear-gradient(90deg, #f0f0f0 15%, #cecdcd 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loadingAnimation 3s infinite linear;
+}
+
+@keyframes loadingAnimation {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
