@@ -9,7 +9,7 @@ import Map from '../components/Map';
 function Home() {
   const dispatch = useAppDispatch();
   const userState = useAppSelector(state => state.user);
-
+  
   const handleAuthStateChange = async (user: any) => { 
 
     if (user && (userState.fb_uid !== user.uid)) { 
