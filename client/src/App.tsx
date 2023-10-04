@@ -7,15 +7,8 @@ import Header from './components/Header';
 import Footer from './components/Footer';
 import { Route, Routes } from 'react-router-dom';
 import Auth from './pages/Auth';
-import {useAppDispatch } from './redux/hooks';
-import { watchAuthState } from './redux/authSlice';
+
 function App() {
-
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(watchAuthState());
-  },[]);
 
   return (
     <div className="App">

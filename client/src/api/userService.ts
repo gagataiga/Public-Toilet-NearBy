@@ -4,7 +4,9 @@ const apiUrl: string = process.env.REACT_APP_API_URL || "";
 
 export const getUserInfo = async(fb_uid: string) => { 
   try {
-    const response = await axios.get(`${apiUrl}users/auth/` + fb_uid);
+    console.log("get user info 呼ばれたよ");
+    const response = await axios.get(`${apiUrl}users/auth/${fb_uid}`);
+    console.log("user service",response.data);
     return response.data;
     }catch (error){
       console.error(error);

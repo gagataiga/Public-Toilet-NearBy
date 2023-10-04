@@ -1,26 +1,52 @@
 import { createSlice , PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./state";
 import { Dispatch } from "redux";
+import { useAppSelector, useAppDispatch } from './hooks';
 import { User } from "./types";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword, onAuthStateChanged} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword, onAuthStateChanged,fetchSignInMethodsForEmail} from "firebase/auth";
 import { auth } from "../firebase.conf";
 import { getUserInfo, register } from "../api/userService";
 import { UserInfo } from "../common/types";
 
+// actions
+export const authSlice = createSlice({
+  name: "userAuth",
+  initialState,
+  reducers: {
+    setUserAuth: (state, action:PayloadAction<User>) =>{
+      return {
+        ...state,
+        user: {
+          uid: action.payload.uid,
+          fb_uid: action.payload.fb_uid,
+          name: action.payload.name,
+          email: action.payload.email,
+          isLoggedIn: true
+        }
+      }
+    },
+    clearUser: (state, action: PayloadAction<User>) => { 
+      // everything should be clear
+      return {
+        user: {
+          uid: 0,
+          fb_uid: "",
+          name: "",
+          email: "",
+          isLoggedIn: false,
+        }
+      }
+    }
+  }
+});
+
+
 export const signIn = (email: string, password: string) => { 
   return async (dispatch: Dispatch) => { 
     try {
-      const loggedIn = await signInWithEmailAndPassword(auth, email, password);
       // user exists
-      const userData = await getUserInfo(loggedIn.user.uid);
-      // call user info api from backend
-      dispatch(setUserAuth({
-        uid: userData.user_id,
-        name: userData.username,
-        email: userData.email,
-        isLoggedIn: true
-      }));
-
+      const loggedIn = await signInWithEmailAndPassword(auth, email, password);
+      return true;
     } catch (error) {
       console.error(error);
       alert("user is not exist");
@@ -28,7 +54,7 @@ export const signIn = (email: string, password: string) => {
   }
 }
 
-export const signUp = (email:string, password:string, userName:string) => { 
+export const signUp = (email: string, password: string, userName: string) => { 
   return async (dispatch: Dispatch) => { 
     try {
       // register in firebase
@@ -43,13 +69,15 @@ export const signUp = (email:string, password:string, userName:string) => {
 
       // register new user in backend
       const uid:number = await register(user);
-      
-      dispatch(setUserAuth({
+        dispatch(setUserAuth({
         uid: uid,
+        fb_uid: newUser.user.uid,
         name: userName,
         email: email,
         isLoggedIn: true
-      }));
+        }));
+      
+      return true;
 
     } catch (error) {
       console.error(error);
@@ -59,56 +87,10 @@ export const signUp = (email:string, password:string, userName:string) => {
   }
 }
 
-export const watchAuthState = () => async (dispatch: Dispatch) => {
-  const unsubscribe = onAuthStateChanged(auth, async (user) => {
-    if (user) {
-      const {user_id,username,email} = await getUserInfo(user.uid);
-      dispatch(setUserAuth({
-        uid: user_id,
-        name: username,
-        email: email,
-        isLoggedIn: true
-      }));
-    }
-  });
-  return unsubscribe;
-};
-
-
 export const signOut = () => { 
 
 }
 
-// actions
-export const authSlice = createSlice({
-  name: "userAuth",
-  initialState,
-  reducers: {
-    setUserAuth: (state, action:PayloadAction<User>) =>{
-      console.log(action.payload);
-      return {
-        ...state,
-        user: {
-          uid: action.payload.uid,
-          name: action.payload.name,
-          email: action.payload.email,
-          isLoggedIn: true
-        }
-      }
-    },
-    clearUser: (state, action: PayloadAction<User>) => { 
-      // everything should be clear
-      return {
-        user: {
-          uid: 0,
-          name: "",
-          email: "",
-          isLoggedIn: false,
-        }
-      }
-    }
-  }
-});
 
 export const { setUserAuth } = authSlice.actions;
 

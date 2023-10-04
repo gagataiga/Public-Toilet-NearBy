@@ -37,25 +37,27 @@ function AuthForm(){
 
   const handleSubmit = async(e: any) => { 
     e.preventDefault();
+    let isSignUpSuccessful: boolean | undefined;
+    
     try {   
       if (isSignUp) {
         // signup
-        await dispatch(signUp(email, password, userName));
+        isSignUpSuccessful = await dispatch(signUp(email, password, userName));
       } else {
         // signIn
-        await dispatch(signIn(email, password));
+        isSignUpSuccessful = await dispatch(signIn(email, password));
       }
       //navigate when user logs in or signs up successfully
-      if (userState.user.isLoggedIn) { 
+      if (isSignUpSuccessful) { 
         navigate("/");
+        alert("Login and Registration successful!");
       }
-      
+
     } catch (error) {
       console.error(error);
     }
-  }
-  console.log(userState);
-  
+
+  }  
   return (
     <div className='form__container'>
     <Box component="form" className='form' onSubmit={handleSubmit}>
