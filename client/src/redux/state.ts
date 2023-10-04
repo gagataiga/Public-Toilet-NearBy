@@ -1,8 +1,11 @@
 import { User } from "./types"
 
-export const initialState: User = {
-    uid: "1",
-    name: "Hogeです",
-    email: "hoge",
-    isLogined: false,
+export const initialState: { user: User } = {
+  user: {
+    uid: 0,
+    fb_uid: "",
+    name: "",
+    email: "",
+    isLoggedIn: false,
+  }
 }

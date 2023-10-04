@@ -1,69 +1,12 @@
-import { createSlice , PayloadAction} from "@reduxjs/toolkit";
+import { createSlice , PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./state";
 import { Dispatch } from "redux";
+import { useAppSelector, useAppDispatch } from './hooks';
 import { User } from "./types";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut as firebaseSignOut, onAuthStateChanged} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword, onAuthStateChanged,fetchSignInMethodsForEmail} from "firebase/auth";
 import { auth } from "../firebase.conf";
-
-
-export const signIn = (email: string, password: string) => { 
-
-  return async (dispatch: Dispatch) => { 
-    try {
-      const loggedIn = await signInWithEmailAndPassword(auth, email, password);
-      // call user info api from backend
-      dispatch(setUserAuth({
-        uid: loggedIn.user.uid,
-        name: "after",
-        email: email,
-        isLogined: true
-      }));
-    } catch (error) {
-      console.log(error);
-      alert("user login is not suceedd")
-    }
-  }
-}
-
-export const signUp = (email:string, password:string, userName:string) => { 
-  return async (dispatch: Dispatch) => { 
-    try {
-      const newUser = await createUserWithEmailAndPassword(auth, email, password);
-      // call user info api from backend
-      console.log(newUser);
-      dispatch(setUserAuth({
-        uid: newUser.user.uid,
-        name: "after",
-        email: email,
-        isLogined: true
-      }));
-    } catch (error) {
-      console.log(error);
-      alert("user login is not suceedd")
-    }
-  }
-}
-
-export const watchAuthState = () => async (dispatch:Dispatch) => {
-  const unsubscribe = onAuthStateChanged(auth, (user) => {
-    if (user) {
-      // ユーザーがログインしている場合、認証されたユーザーオブジェクトをRedux stateにセット
-      // apiから返されたものをここで取得
-      // dispatch(setUser(user)); 
-    } else {
-      // ユーザーがログアウトしている場合、初期状態に設定して認証状態をクリア
-      // dispatch(clearUser({
-        
-      // })); 
-    }
-  });
-  return unsubscribe;
-};
-
-
-export const signOut = () => { 
-
-}
+import { getUserInfo, register } from "../api/userService";
+import { UserInfo } from "../common/types";
 
 // actions
 export const authSlice = createSlice({
@@ -73,23 +16,81 @@ export const authSlice = createSlice({
     setUserAuth: (state, action:PayloadAction<User>) =>{
       return {
         ...state,
-        ...action.payload
+        user: {
+          uid: action.payload.uid,
+          fb_uid: action.payload.fb_uid,
+          name: action.payload.name,
+          email: action.payload.email,
+          isLoggedIn: true
+        }
       }
     },
     clearUser: (state, action: PayloadAction<User>) => { 
       // everything should be clear
       return {
-        uid: "",
-        name: "",
-        email: "",
-        isLogined: false,
+        user: {
+          uid: 0,
+          fb_uid: "",
+          name: "",
+          email: "",
+          isLoggedIn: false,
+        }
       }
     }
-  },
-  extraReducers: (builder) => { 
-    
   }
 });
+
+
+export const signIn = (email: string, password: string) => { 
+  return async (dispatch: Dispatch) => { 
+    try {
+      // user exists
+      const loggedIn = await signInWithEmailAndPassword(auth, email, password);
+      return true;
+    } catch (error) {
+      console.error(error);
+      alert("user is not exist");
+    }
+  }
+}
+
+export const signUp = (email: string, password: string, userName: string) => { 
+  return async (dispatch: Dispatch) => { 
+    try {
+      // register in firebase
+      const newUser = await createUserWithEmailAndPassword(auth, email, password);
+
+      const user:UserInfo = {
+        fb_uid: newUser.user.uid,
+        email: email,
+        password: password,
+        username: userName
+      }
+
+      // register new user in backend
+      const uid:number = await register(user);
+        dispatch(setUserAuth({
+        uid: uid,
+        fb_uid: newUser.user.uid,
+        name: userName,
+        email: email,
+        isLoggedIn: true
+        }));
+      
+      return true;
+
+    } catch (error) {
+      console.error(error);
+      alert("user sign up error")
+    }
+    
+  }
+}
+
+export const signOut = () => { 
+
+}
+
 
 export const { setUserAuth } = authSlice.actions;
 

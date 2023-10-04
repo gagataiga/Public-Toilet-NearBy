@@ -5,6 +5,7 @@ import Button from '@mui/material/Button';
 import "./AuthFrom.css";
 import { signIn, signUp } from '../redux/authSlice';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { useNavigate } from 'react-router-dom';
 
 function AuthForm(){
   const [email, setEmail] = useState<string>("hoge@gmail.com");
@@ -13,6 +14,8 @@ function AuthForm(){
   const [userName, setUserName] = useState<string>("hoge");
 
   const dispatch = useAppDispatch();
+  const userState = useAppSelector((state) => state);
+  const navigate = useNavigate();
 
   const authMessages: { tologin: string, toSignUp: string, login:string,signUp:string } =
   {
@@ -34,16 +37,27 @@ function AuthForm(){
 
   const handleSubmit = async(e: any) => { 
     e.preventDefault();
+    let isSignUpSuccessful: boolean | undefined;
+    
+    try {   
+      if (isSignUp) {
+        // signup
+        isSignUpSuccessful = await dispatch(signUp(email, password, userName));
+      } else {
+        // signIn
+        isSignUpSuccessful = await dispatch(signIn(email, password));
+      }
+      //navigate when user logs in or signs up successfully
+      if (isSignUpSuccessful) { 
+        navigate("/");
+        alert("Login and Registration successful!");
+      }
 
-    if (isSignUp) {
-      // signup
-      dispatch(signUp(email, password, userName));
-    } else {
-      // signIn
-      dispatch(signIn(email,password));
+    } catch (error) {
+      console.error(error);
     }
-  }
 
+  }  
   return (
     <div className='form__container'>
     <Box component="form" className='form' onSubmit={handleSubmit}>
