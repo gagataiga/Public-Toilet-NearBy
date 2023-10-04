@@ -1,7 +1,7 @@
 import React from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import { LatLng } from "leaflet";
-
+import LocationMaker from './LocationMarker';
 const Map = () => {
   const position = new LatLng(51.505, -0.09); 
   
@@ -12,6 +12,7 @@ const Map = () => {
         attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
+      <LocationMaker />
       </MapContainer>
     </div>
   )
