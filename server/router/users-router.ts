@@ -33,11 +33,11 @@ router.post("/auth", async (req:Request, res:Response) => {
     const registeredUser = await usersModel.insertUser(user);
     // set cache fb_uid(key):{user_id:..., username:... , email:...};
     console.log(registeredUser);
-    // cache.set(user.fb_uid, {
-    //   user_id: registeredUser.user_id,
-    //   username: user.username,
-    //   email: user.email
-    // }, 3600);
+    cache.set(user.fb_uid, {
+      user_id: registeredUser.user_id,
+      username: user.username,
+      email: user.email
+    }, 3600);
     // send back to user Id
     res.status(200).send(registeredUser);
   } catch (error) {
