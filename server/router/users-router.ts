@@ -10,10 +10,8 @@ const usersModel = require("../model/users-model");
 router.get("/auth/:firebaseId", cacheUserInfo, async (req: Request, res: Response) => {
   try { 
     const userFbId: string = req.params.firebaseId;
-    console.log("-------------------",userFbId);
     const userData = await usersModel.getUser(userFbId);
     // set cache fb_uid(key):{user_id:..., username:... , email:...};
-    console.log("hhhhh",userData);
     cache.set(userFbId, {
       user_id: userData.user_id,
       username: userData.username,
@@ -32,7 +30,6 @@ router.post("/auth", async (req:Request, res:Response) => {
     const user = req.body;
     const registeredUser = await usersModel.insertUser(user);
     // set cache fb_uid(key):{user_id:..., username:... , email:...};
-    console.log(registeredUser);
     cache.set(user.fb_uid, {
       user_id: registeredUser.user_id,
       username: user.username,

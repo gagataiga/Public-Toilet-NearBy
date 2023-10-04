@@ -1,15 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
-import { LatLng } from "leaflet";
 import LocationMaker from './LocationMarker';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setLocation } from '../redux/locationSlice';
 import { Location } from '../common/types';
 import "./Map.css"
+
 const Map = () => {
-  const position = new LatLng(51.505, -0.09); 
   const locationState:Location = useAppSelector((state) => state.location);
-  console.log("location State", locationState);
   const dispatch = useAppDispatch();
 
   useEffect(() => { 
@@ -34,7 +32,7 @@ const Map = () => {
         <div className='map_container skeleton-loader'></div>
       ):
         (
-          <MapContainer className='map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : position} zoom={14}>
+          <MapContainer className='map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={14}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"

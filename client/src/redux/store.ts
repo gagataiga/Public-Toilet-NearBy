@@ -7,8 +7,6 @@ const reducer = {
   location: locationReducer
 }
 
-console.log(reducer);
-
 export const store = configureStore({
   reducer: reducer
 });
