@@ -6,9 +6,12 @@ import { setLocation } from '../redux/locationSlice';
 import { Location } from '../common/types';
 import "./Map.css"
 import PostBtn from './PostBtn';
+import { User } from '../redux/types';
 
 const Map = () => {
-  const locationState:Location = useAppSelector((state) => state.location);
+
+  const locationState: Location = useAppSelector((state) => state.location);
+  const userState: User = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => { 
@@ -41,7 +44,7 @@ const Map = () => {
             />
             <LocationMaker />
             </MapContainer>
-            <PostBtn />
+            {userState.isLoggedIn && (<PostBtn/>)}
         </div>
         )
       }

@@ -57,12 +57,10 @@ export const signUp = (email: string, password: string, userName: string) => {
       const newUser = await createUserWithEmailAndPassword(auth, email, password);
 
       const user: UserInfo = {
-        user: {   
-          fb_uid: newUser.user.uid,
+          username: userName,
           email: email,
           password: password,
-          username: userName
-        }
+          fb_uid: newUser.user.uid,
       }
 
       // register new user in backend

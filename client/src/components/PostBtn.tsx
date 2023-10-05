@@ -1,10 +1,13 @@
 import React from 'react'
 import "./PostBtn.css";
+import { Link } from 'react-router-dom';
 
 const PostBtn = () => {
   return (
     <div className='post-btn_wrapper'>
-      <button id="post-btn">hoge</button>
+      <Link to="/post">
+        <button id="post-btn" >hoge</button>
+      </Link>
     </div>
   )
 }

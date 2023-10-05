@@ -11,7 +11,7 @@ function Home() {
   const userState = useAppSelector(state => state.user);
   
   const handleAuthStateChange = async (user: any) => { 
-
+    console.log("ここが呼ばれるよ",user);
     if (user && (userState.fb_uid !== user.uid)) { 
       console.log("user情報を取得");
       try {   
