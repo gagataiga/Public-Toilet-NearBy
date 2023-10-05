@@ -5,12 +5,10 @@ export interface NavLink {
 }
 
 export interface UserInfo { 
-  user: {   
-    fb_uid: string,
+    username: string
     email: string,
     password: string,
-    username: string
-  }
+    fb_uid: string,
 }
 
 export interface Location { 

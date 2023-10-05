@@ -14,7 +14,7 @@ module.exports = {
       throw error;
     }
   },
-  async insertUser(user: { name: string, email: string, password: string, fb_uid: string }) {
+  async insertUser(user:{username: string, email: string, password: string, fb_uid: string }) {
     try {
       const [registeredUser] = await userKnex(USERS_TABLE).insert(user).returning("user_id");
       return registeredUser;

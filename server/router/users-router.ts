@@ -28,6 +28,7 @@ router.post("/auth", async (req:Request, res:Response) => {
   try {
     //example user:{fb_uid:.. , username:.. , password:.., email:...}
     const user = req.body;
+    console.log(user);
     const registeredUser = await usersModel.insertUser(user);
     // set cache fb_uid(key):{user_id:..., username:... , email:...};
     cache.set(user.fb_uid, {

@@ -5,9 +5,13 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setLocation } from '../redux/locationSlice';
 import { Location } from '../common/types';
 import "./Map.css"
+import PostBtn from './PostBtn';
+import { User } from '../redux/types';
 
 const Map = () => {
-  const locationState:Location = useAppSelector((state) => state.location);
+
+  const locationState: Location = useAppSelector((state) => state.location);
+  const userState: User = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
 
   useEffect(() => { 
@@ -32,13 +36,16 @@ const Map = () => {
         <div className='map_container skeleton-loader'></div>
       ):
         (
+        <div className='map'>
           <MapContainer className='map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={14}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
             <LocationMaker />
-          </MapContainer>
+            </MapContainer>
+            {userState.isLoggedIn && (<PostBtn/>)}
+        </div>
         )
       }
     </div>
