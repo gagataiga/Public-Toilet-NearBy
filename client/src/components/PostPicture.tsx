@@ -7,12 +7,9 @@ const PostPicture = () => {
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files;
     console.log(file);
-    const reader = new FileReader();
 
     if (file && file[0]) {
       console.log(file[0]);
-      console.log(reader.result);
-      reader.readAsDataURL(file[0]);
       const objecUrl = URL.createObjectURL(file[0]);
       console.log(objecUrl);
       setImageURL(objecUrl);
