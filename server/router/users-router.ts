@@ -47,7 +47,6 @@ router.post("/auth", async (req:Request, res:Response) => {
 
 module.exports = router;
 
-
 function getUser() {
   throw new Error("Function not implemented.");
 }

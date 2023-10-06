@@ -6,7 +6,7 @@ const PostBtn = () => {
   return (
     <div className='post-btn_wrapper'>
       <Link to="/post">
-        <button id="post-btn" >hoge</button>
+        <button id="post-btn" >Post</button>
       </Link>
     </div>
   )

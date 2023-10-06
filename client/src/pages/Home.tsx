@@ -39,7 +39,7 @@ function Home() {
     <div>
       <main>
         <div className='search'>search box</div>
-        <Map/>
+        <Map isPost={false}/>
       </main>
     </div>
   )
