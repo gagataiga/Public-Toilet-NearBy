@@ -1,8 +1,50 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import "./Post.css"
+import { useAppSelector, useAppDispatch } from '../redux/hooks';
+import { Location } from '../common/types';
+import { User } from "../redux/types";
+import Map from '../components/Map';
+import PostPicture from '../components/PostPicture';
+import Ratings from '../components/Ratings';
+import { Button } from '@mui/material';
+import Comment from '../components/Comment';
+import Tags from '../components/Tags';
+import Cost from '../components/Cost';
 
 function Post() {
+  const locationState: Location = useAppSelector((state) => state.location);
+  const userState: User = useAppSelector((state) => state.user);
+
+  const [image, setImage] = useState<FileList | null>(null);
+  const [tags, setTags] = useState<string[]>([]);
+  const [ratingValue, setRating] = useState<number>(3);
+  const [toiletFee, setToiletFee] = useState<string>("Free");
+  const [comment, setComment] = useState("");
+  const handlePost = (e:any) => { 
+    e.preventDefault();
+  }
+
   return (
-    <div>Post</div>
+    <div className='post'>
+      <form action="post" className='post_form'>
+      <p className='post_item_message'>Thank you for your volunteerism</p>
+        {/* this map down below should be for post */}
+        <fieldset>
+          <legend>Choose Toilet location</legend>
+        <Map isPost={true}/>
+        </fieldset>
+        <PostPicture image={image} setImage={setImage}/>
+        <Ratings ratingValue={ratingValue} setRating={setRating}/>
+        <Cost toiletFee={toiletFee} setToiletFee={setToiletFee} />
+        <Tags tags={tags} setTags={setTags}/>
+        <Comment comment={comment} setComment={setComment} />
+        <Button variant="contained"
+          type="submit"
+          onClick={handlePost}>Submit
+        </Button>
+      </form>
+    </div>
+
   )
 }
 

@@ -5,8 +5,9 @@ import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Header from './components/Header';
 import Footer from './components/Footer';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes,Navigate } from 'react-router-dom';
 import Auth from './pages/Auth';
+import Post from './pages/Post';
 
 function App() {
 
@@ -15,8 +16,10 @@ function App() {
       <Header />
       <Routes>
         <Route path='/landing' element={<Landing />} />
-        <Route path='/' element={<Home />} />
-        <Route path='/auth' element={<Auth/>} />
+        <Route path='/home' element={<Home />} />
+        <Route path='/auth' element={<Auth />} />
+        <Route path='/post' element={<Post />} />
+        <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     <Footer />
     </div>

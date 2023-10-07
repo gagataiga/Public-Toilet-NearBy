@@ -1,0 +1,26 @@
+
+.post {
+  height: 75vh;
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 2px 10px rgb(183, 183, 183);
+  overflow: scroll;
+  margin: auto;
+  margin-top: 30px;
+  border-radius: 5px;
+}
+
+.post_item_message{
+  font-size:medium;
+  text-align: center;
+}
+
+.user-map_container{
+  height: 200px;
+  width: 75%;
+  margin: auto;
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 1px 1px 10px rgb(139, 139, 139);
+}
+

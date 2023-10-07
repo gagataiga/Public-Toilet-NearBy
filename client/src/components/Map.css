@@ -1,9 +1,18 @@
+.post-map_container{
+  height: 20vh;
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+  box-shadow: 3px 3px 1px #bebebe ;
+  margin: auto;
+}
+
 .map_container {
-  height: 70vh;
+  height: 75vh;
   width: 95%;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  box-shadow: 3px 3px 1px #888888 ;
+  box-shadow: 3px 3px 1px #bebebe ;
   margin: auto;
 }
 
