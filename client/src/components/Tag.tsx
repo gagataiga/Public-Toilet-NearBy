@@ -1,12 +1,7 @@
 import React from 'react'
+import { TagProps } from './types'
 
-interface props{
-  label: string
-  isSelected: boolean
-  onToggle: (label:string) => void
-}
-
-const Tag = ({label,isSelected,onToggle}:props) => {
+const Tag = ({label,isSelected,onToggle}:TagProps) => {
   return (
     <div className='tag'>
       <button type="button"
