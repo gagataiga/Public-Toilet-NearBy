@@ -15,8 +15,8 @@ export interface RatingProps{
 }
 
 export interface PostPictureProps{
-  image: FileList | null
-  setImage: React.Dispatch<React.SetStateAction<FileList | null>>
+  image: File | null
+  setImage: React.Dispatch<React.SetStateAction<File | null>>
 }
 
 export interface CostProps{
@@ -27,4 +27,12 @@ export interface CostProps{
 export interface CommentProps { 
   comment: string
   setComment: React.Dispatch<React.SetStateAction<string>>
+}
+
+export interface Post{
+  tags: string[]
+  ratingValue: number
+  imageURL: string
+  toiletFee: string
+  comment: string
 }
