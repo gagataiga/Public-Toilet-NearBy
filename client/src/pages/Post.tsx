@@ -23,20 +23,25 @@ function Post() {
   const [toiletFee, setToiletFee] = useState<string>("Free");
   const [comment, setComment] = useState("");
 
-  
   const handlePost = async(e:any) => { 
-    e.preventDefault();    
+    e.preventDefault();
     const isValidatedInput = validateInputs(image, tags, ratingValue, toiletFee, comment);
+
     if (!isValidatedInput) {
       alert("全て入力してください");
       return;
     }
 
-    if (image) {   
+    if (image) {
       const userImgUrl = await imageUploader(image);
       console.log(userImgUrl);
+      try {
+        // upload user location and user posts
+      } catch(error) { 
+        console.error(error);
+      }
     }
-
+   
   } 
 
   return (

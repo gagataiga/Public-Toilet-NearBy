@@ -28,3 +28,11 @@ export interface CommentProps {
   comment: string
   setComment: React.Dispatch<React.SetStateAction<string>>
 }
+
+export interface Post{
+  tags: string[]
+  ratingValue: number
+  imageURL: string
+  toiletFee: string
+  comment: string
+}

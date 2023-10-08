@@ -2,6 +2,8 @@ import axios from "axios";
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { storage } from "../firebase.conf";
 import { generateUniqueFileName } from "../utils/util";
+import { Post } from "../components/types";
+import { Location } from "../common/types";
 
 // upload image to firebase firestorage
 export const imageUploader = async (selectedFile: File): Promise<string | undefined> => {
@@ -29,6 +31,11 @@ export const imageUploader = async (selectedFile: File): Promise<string | undefi
 
 };
 
-export const postUploader = () => {
+
+export const postLocation = async (locagion:Location) => { 
+
+}
+
+export const postUploader = async(posts:Post) => {
   console.log("post upload");
 };
