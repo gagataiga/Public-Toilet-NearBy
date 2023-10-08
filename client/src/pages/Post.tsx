@@ -10,7 +10,8 @@ import { Button } from '@mui/material';
 import Comment from '../components/Comment';
 import Tags from '../components/Tags';
 import Cost from '../components/Cost';
-import { imageUploader } from '../api/postImgService';
+import { imageUploader } from '../api/postService';
+import { validateInputs } from "../utils/util";
 
 function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
@@ -23,18 +24,20 @@ function Post() {
   const [comment, setComment] = useState("");
 
   
-
   const handlePost = async(e:any) => { 
-    e.preventDefault();
-    console.log("hoge");
-    
+    e.preventDefault();    
+    const isValidatedInput = validateInputs(image, tags, ratingValue, toiletFee, comment);
+    if (!isValidatedInput) {
+      alert("全て入力してください");
+      return;
+    }
+
     if (image) {   
       const userImgUrl = await imageUploader(image);
       console.log(userImgUrl);
     }
-  }
 
-  
+  } 
 
   return (
     <div className='post'>

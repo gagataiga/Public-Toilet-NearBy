@@ -4,12 +4,12 @@ import { storage } from "../firebase.conf";
 import { generateUniqueFileName } from "../utils/util";
 
 // upload image to firebase firestorage
-export const imageUploader = async(selectedFile:File):Promise<string | undefined> => { 
+export const imageUploader = async (selectedFile: File): Promise<string | undefined> => {
   if (selectedFile) {
     // image file should be radom num
     const randomId = generateUniqueFileName();
     const storageRef = ref(storage, `posts/${randomId}`);
-    try { 
+    try {
       // upload image
       const uploadedSnapshot = await uploadBytesResumable(
         storageRef,
@@ -27,6 +27,8 @@ export const imageUploader = async(selectedFile:File):Promise<string | undefined
     }
   }
 
+};
 
-
-} 
+export const postUploader = () => {
+  console.log("post upload");
+};

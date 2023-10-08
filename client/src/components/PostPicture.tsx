@@ -29,7 +29,6 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
       <div className="img-preview">
         {imageURL ? (<img src={imageURL} alt="Selected Image" />):(<div>ここにimageが表示されるよ</div>)}
         </div>
-        <input type="file" />
       </fieldset>
     </div>
   )
