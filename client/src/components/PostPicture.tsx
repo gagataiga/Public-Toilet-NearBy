@@ -7,15 +7,14 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
   >("");
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    console.log("choopse file");
+    
     const file = e.target.files;
     if (file && file[0]) {
       console.log(file[0]);
       const objecUrl = URL.createObjectURL(file[0]);
-      setImage(file);// setimagefile
+      setImage(file[0]);// setimagefile
       console.log("image", image);
-      const formData = new FormData();
-      formData.append('file', file[0]);
-      console.log(formData);
       console.log(objecUrl);
       setImageURL(objecUrl);
     }
@@ -29,7 +28,8 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
       <input type="file" name="image" id="image-upload" onChange={handleImageSelect} accept="image/*"/>
       <div className="img-preview">
         {imageURL ? (<img src={imageURL} alt="Selected Image" />):(<div>ここにimageが表示されるよ</div>)}
-      </div>
+        </div>
+        <input type="file" />
       </fieldset>
     </div>
   )

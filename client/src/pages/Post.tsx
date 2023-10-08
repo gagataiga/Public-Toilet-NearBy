@@ -10,19 +10,31 @@ import { Button } from '@mui/material';
 import Comment from '../components/Comment';
 import Tags from '../components/Tags';
 import Cost from '../components/Cost';
+import { imageUploader } from '../api/postImgService';
 
 function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
   const userState: User = useAppSelector((state) => state.user);
 
-  const [image, setImage] = useState<FileList | null>(null);
+  const [image, setImage] = useState<File | null>(null);
   const [tags, setTags] = useState<string[]>([]);
   const [ratingValue, setRating] = useState<number>(3);
   const [toiletFee, setToiletFee] = useState<string>("Free");
   const [comment, setComment] = useState("");
-  const handlePost = (e:any) => { 
+
+  
+
+  const handlePost = async(e:any) => { 
     e.preventDefault();
+    console.log("hoge");
+    
+    if (image) {   
+      const userImgUrl = await imageUploader(image);
+      console.log(userImgUrl);
+    }
   }
+
+  
 
   return (
     <div className='post'>

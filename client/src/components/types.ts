@@ -15,8 +15,8 @@ export interface RatingProps{
 }
 
 export interface PostPictureProps{
-  image: FileList | null
-  setImage: React.Dispatch<React.SetStateAction<FileList | null>>
+  image: File | null
+  setImage: React.Dispatch<React.SetStateAction<File | null>>
 }
 
 export interface CostProps{
