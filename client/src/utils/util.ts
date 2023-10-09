@@ -6,7 +6,7 @@ export const generateUniqueFileName = () => {
   return fileName;
 }
 
-export const validateInputs = (image: File | null, tags: string[], ratingValue: number, toiletFee: string, comment: string): boolean => {
+export const validateInputs = (image: File | null, tags: number[], ratingValue: number, toiletFee: string, comment: string): boolean => {
   if (!image ||
     tags.length === 0 ||
     (ratingValue < 1 || ratingValue > 5) ||

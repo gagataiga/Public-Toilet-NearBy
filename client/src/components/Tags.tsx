@@ -1,28 +1,29 @@
 import React from 'react'
 import Tag from './Tag'
-import { TagProps, TagsProps } from './types'
+import { TagsProps } from './types'
 import { facilities } from '../common/data/Facilities'
+
 const Tags = ({ tags, setTags }:TagsProps) => {
 
-  const handleTagToggle = (tag: string): void => {
-    if (tags.includes(tag)) {
-      // タグが既に選択されていれば、選択状態を解除
-      setTags(tags.filter((selectedTag) => selectedTag !== tag));
+  const handleTagToggle = (tagNum: number): void => {
+    if (tags.includes(tagNum)) {
+      setTags(tags.filter((selectedTag) => selectedTag !== tagNum));
     } else {
-      // タグが選択されていなければ、選択状態に追加
-      setTags([...tags, tag]);
+      setTags([...tags, tagNum]);
+      console.log(tags);
     }
   };
-
+console.log(tags);
   return (
     <div>
       <fieldset>
         <legend>Facilities</legend>
-      {facilities.map((tag) => (
+      {(facilities).map((tag:string,index:number) => (
         <Tag
           key={tag}
+          tagKey={index}
           label={tag}
-          isSelected={tags.includes(tag)}
+          isSelected={tags.includes(index)}
           onToggle={handleTagToggle}
         />
         ))}
