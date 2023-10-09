@@ -13,7 +13,7 @@ const Tags = ({ tags, setTags }:TagsProps) => {
       console.log(tags);
     }
   };
-console.log(tags);
+
   return (
     <div>
       <fieldset>

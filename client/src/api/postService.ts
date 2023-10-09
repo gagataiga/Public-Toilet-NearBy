@@ -2,8 +2,8 @@ import axios from "axios";
 import {ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import { storage } from "../firebase.conf";
 import { generateUniqueFileName } from "../utils/util";
-import { Post } from "../components/types";
 import { Location } from "../common/types";
+import { UserPost } from "../common/types";
 
 const apiUrl: string = process.env.REACT_APP_API_URL || "";
 
@@ -32,7 +32,7 @@ export const imageUploader = async (selectedFile: File): Promise<string | undefi
 
 };
 
-export const postLocation = async (location:{longitude: number | undefined,latitude: number | undefined}) => { 
+export const locationUploader = async (location:{longitude: number | undefined,latitude: number | undefined}) => { 
   
   if (!location.latitude || !location.longitude) {
     return 0;
@@ -46,6 +46,11 @@ export const postLocation = async (location:{longitude: number | undefined,latit
   }
 }
 
-export const postUploader = async(posts:Post) => {
-  console.log("post upload");
+export const postUploader = async(post:UserPost) => {
+  try {
+    const response = await axios.post(`${apiUrl}posts/`, post);
+    return response;
+  } catch (error) {
+    console.error(error);
+  }
 };
