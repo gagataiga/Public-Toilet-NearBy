@@ -2,7 +2,8 @@ import React from 'react'
 import { Rating, Stack,Typography } from '@mui/material'
 import { RatingProps } from './types'
 
-const Ratings = ({ ratingValue, setRating }: RatingProps) => {
+const
+  Ratings = ({ ratingValue, setRating }: RatingProps) => {
   
   const handleRatingChange = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
     console.log("選択",newValue);
