@@ -5,6 +5,8 @@ import { generateUniqueFileName } from "../utils/util";
 import { Post } from "../components/types";
 import { Location } from "../common/types";
 
+const apiUrl: string = process.env.REACT_APP_API_URL || "";
+
 // upload image to firebase firestorage
 export const imageUploader = async (selectedFile: File): Promise<string | undefined> => {
   if (selectedFile) {
@@ -25,15 +27,23 @@ export const imageUploader = async (selectedFile: File): Promise<string | undefi
     } catch (error) {
       console.log(error);
       console.log("upload is not successed");
-      
     }
   }
 
 };
 
+export const postLocation = async (location:{longitude: number | undefined,latitude: number | undefined}) => { 
+  
+  if (!location.latitude || !location.longitude) {
+    return 0;
+  }
 
-export const postLocation = async (locagion:Location) => { 
-
+  try {
+    const response = await axios.post(`${apiUrl}locations/`,location);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
 }
 
 export const postUploader = async(posts:Post) => {

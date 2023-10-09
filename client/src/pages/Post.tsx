@@ -12,6 +12,7 @@ import Tags from '../components/Tags';
 import Cost from '../components/Cost';
 import { imageUploader } from '../api/postService';
 import { validateInputs } from "../utils/util";
+import { postLocation } from '../api/postService';
 
 function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
@@ -37,6 +38,19 @@ function Post() {
       console.log(userImgUrl);
       try {
         // upload user location and user posts
+        const locationId = await postLocation({ longitude: locationState.lng, latitude: locationState.lat });
+        
+        if (locationId === 0) {
+          alert("Your location was not found");
+          return;
+        }
+
+        try {
+          // submit posts
+        } catch (error) {
+          
+        }
+        // 
       } catch(error) { 
         console.error(error);
       }

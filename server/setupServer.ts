@@ -1,5 +1,7 @@
 const express = require("express");
 const usersRouter = require("./router/users-router");
+const locationsRouter = require("./router/locations-router");
+
 const cors = require("cors");
 
 export const setUpServer = () => { 
@@ -13,6 +15,7 @@ export const setUpServer = () => {
   app.use(express.json());
   // user 
   app.use("/users", usersRouter);
+  app.use("/locations", locationsRouter);
 
   return app;
 }
