@@ -37,6 +37,8 @@ function Post() {
       console.log(userImgUrl);
       try {
         // upload user location and user posts
+
+        // 
       } catch(error) { 
         console.error(error);
       }
