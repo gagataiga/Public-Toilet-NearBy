@@ -1,11 +1,11 @@
 import React from 'react'
 import { TagProps } from './types'
 
-const Tag = ({label,isSelected,onToggle}:TagProps) => {
+const Tag = ({tagKey,label,isSelected,onToggle}:TagProps) => {
   return (
     <div className='tag'>
       <button type="button"
-      onClick={() => onToggle(label)}
+      onClick={() => onToggle(tagKey)}
       style={{
         backgroundColor: isSelected ? 'blue' : 'gray',
         color: 'white',

@@ -1,12 +1,13 @@
 export interface TagsProps{
-  tags:string[]
-  setTags: React.Dispatch<React.SetStateAction<string[]>>
+  tags:number[]
+  setTags: React.Dispatch<React.SetStateAction<number[]>>
 }
 
 export interface TagProps {
+  tagKey:number
   label: string
   isSelected: boolean
-  onToggle: (label:string) => void
+  onToggle: (label:number) => void
 }
 
 export interface RatingProps{

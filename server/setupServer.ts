@@ -1,7 +1,7 @@
 const express = require("express");
 const usersRouter = require("./router/users-router");
 const locationsRouter = require("./router/locations-router");
-
+const postsRouter = require("./router/posts-router");
 const cors = require("cors");
 
 export const setUpServer = () => { 
@@ -16,6 +16,6 @@ export const setUpServer = () => {
   // user 
   app.use("/users", usersRouter);
   app.use("/locations", locationsRouter);
-
+  app.use("/posts", postsRouter);
   return app;
 }

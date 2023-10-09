@@ -12,14 +12,14 @@ import Tags from '../components/Tags';
 import Cost from '../components/Cost';
 import { imageUploader } from '../api/postService';
 import { validateInputs } from "../utils/util";
-import { postLocation } from '../api/postService';
+import { locationUploader, postUploader } from '../api/postService';
 
 function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
   const userState: User = useAppSelector((state) => state.user);
 
   const [image, setImage] = useState<File | null>(null);
-  const [tags, setTags] = useState<string[]>([]);
+  const [tags, setTags] = useState<number[]>([]);
   const [ratingValue, setRating] = useState<number>(3);
   const [toiletFee, setToiletFee] = useState<string>("Free");
   const [comment, setComment] = useState("");
@@ -29,33 +29,43 @@ function Post() {
     const isValidatedInput = validateInputs(image, tags, ratingValue, toiletFee, comment);
 
     if (!isValidatedInput) {
-      alert("全て入力してください");
+      alert("Please fill out or choose all of the items");
       return;
+    } else if (!image) {
+      alert("Please select an image");
+      return; 
     }
+    
+    // upload image
+    const userImgUrl: string | undefined = await imageUploader(image);
+    
+    if (!userImgUrl) {
+      alert("your image can not be uploaded");
+      return;
 
-    if (image) {
-      const userImgUrl = await imageUploader(image);
-      console.log(userImgUrl);
+    } else {
+      // everything is fine
       try {
         // upload user location and user posts
-        const locationId = await postLocation({ longitude: locationState.lng, latitude: locationState.lat });
-        
-        if (locationId === 0) {
-          alert("Your location was not found");
-          return;
-        }
-
-        try {
-          // submit posts
-        } catch (error) {
-          
-        }
-        // 
+        const uploadedLocation = await locationUploader({ longitude: locationState.lng, latitude: locationState.lat });
+        console.log(uploadedLocation.location_id);
+          // submit post
+        const userPost = {
+            comment: comment,
+            user_id: userState.uid,
+            cost: toiletFee,
+            facilities: tags,
+            location_id: uploadedLocation.location_id,
+            image_url: userImgUrl,
+            rating: ratingValue
+          }
+        console.log(userPost);
+        const response = await postUploader(userPost);
+        console.log(response);
       } catch(error) { 
         console.error(error);
       }
     }
-   
   } 
 
   return (
