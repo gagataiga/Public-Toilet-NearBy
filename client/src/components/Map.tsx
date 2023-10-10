@@ -7,6 +7,7 @@ import { Location } from '../common/types';
 import "./Map.css"
 import PostBtn from './PostBtn';
 import { User } from '../redux/types';
+import PostMaker from './PostMarker';
 
 interface Props { 
   isPost:boolean
@@ -57,7 +58,6 @@ const Map = (props: Props) => {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
                 <LocationMaker />
-                {/* user posts marker should be here */}
               </MapContainer>
           </div>
           )}
@@ -77,6 +77,7 @@ const Map = (props: Props) => {
             />
               <LocationMaker />
               {/* user posts marker should be here */}
+              <PostMaker/>
             </MapContainer>
             {userState.isLoggedIn && (<PostBtn/>)}
         </div>
