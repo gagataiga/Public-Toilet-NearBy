@@ -25,5 +25,17 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  async getAllPosts() {
+    try {
+      const response = await postsKnex(POSTS_TABLE)
+        .select("post_id", "comment", "user_id", "cost",
+          "facilities", "image_url", "rating",
+          "locations.longitude", "locations.latitude")
+        .join("locations", { "posts.location_id": "locations.location_id" });
+      return response;
+    } catch (error) {
+      throw error;
+    }
   }
 }
