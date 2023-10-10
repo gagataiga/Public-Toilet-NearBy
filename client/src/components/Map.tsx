@@ -63,7 +63,7 @@ const Map = (props: Props) => {
           )}
       </>
       ) : (
-      // this map down below for home 
+    // this map down below for home 
     <>
       {(locationState.lng === undefined) ? (
         <div className='map_container skeleton-loader'></div>
