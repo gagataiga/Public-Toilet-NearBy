@@ -16,11 +16,6 @@ const Map = (props: MapProps) => {
   const locationState: Location = useAppSelector((state) => state.location);
   const userState: User = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const [routes, setRoutes] = useState<[][]>([]);
-  const [duration, setDuration] = useState(0);
-  const [distance, setDistance] = useState(0);
-  const [steps, setSteps] = useState([]);
-  const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
   useEffect(() => { 
     if ("geolocation" in navigator) {
@@ -77,11 +72,9 @@ const Map = (props: MapProps) => {
             />
               <LocationMaker />
               {/* user posts marker should be here */}
-                    <PostMaker setDuration={setDuration} setDistance={setDistance} setRoutes={setRoutes} setSteps={setSteps} routes={routes}
-                    setIsNavigating={setIsNavigating}
-                    />
-            </MapContainer>
-            {userState.isLoggedIn && (<PostBtn/>)}
+                    <PostMaker />
+                  </MapContainer>
+           {userState.isLoggedIn && (<PostBtn/>)}
         </div>
         )
       }

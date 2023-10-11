@@ -30,3 +30,17 @@ export const checkDistance = (from: { lat: number | undefined, lng: number | und
 
   return undefined;
 }
+
+export const changeToMinutes = (seconds:number) => { 
+    const minutes = Math.floor(seconds / 60);
+    return minutes;
+}
+
+export const formatDistance = (distance: number) => {
+  if (distance >= 1000) {
+      const kilometers = (distance / 1000).toFixed(1);
+      return `${kilometers} Km` 
+  } else {
+    return `${distance} m` ;
+  }
+}

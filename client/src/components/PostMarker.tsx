@@ -5,13 +5,14 @@ import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import { Button } from '@mui/material';
-import { checkDistance } from '../utils/util';
-import { PostMarkerProps } from './types';
+import Navigator from './Navigator';
 
-const PostMaker = (props: PostMarkerProps) => {
+const PostMaker = () => {
   // props
-  const { setDuration, setDistance, setSteps, setRoutes, routes } = props;
-  
+  const [routes, setRoutes] = useState<[][]>([]);
+  const [duration, setDuration] = useState(0);
+  const [distance, setDistance] = useState(0);
+  const [steps, setSteps] = useState([]);
   const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState<number[]>([]);
   const locationState: Location = useAppSelector((state) => state.location);
@@ -27,7 +28,6 @@ const PostMaker = (props: PostMarkerProps) => {
     // destination
     const end: string = `${lng},${lat}`;
     const result = await getNavigation(start, end);
-
     const routesArray = result.features[0].geometry.coordinates;
     // the distance between user current location and the destination
     const dis = result.features[0].properties.segments[0].distance;
@@ -39,6 +39,8 @@ const PostMaker = (props: PostMarkerProps) => {
     setDuration(dur);
     setDistance(dis); 
     setSteps(navSteps);
+    // setIsNavigating(true);
+
     // [ [lng,lat] ....] => [ [lat, lng] ..... ];
     const reversedRoutes = routesArray.map((route:any) => [route[1],route[0]]);    
     setRoutes(reversedRoutes);
@@ -58,6 +60,7 @@ const PostMaker = (props: PostMarkerProps) => {
           </Popup>
         </Marker>
         <Polyline positions={routes} color="blue" />
+        <Navigator distance={distance} duration={duration} steps={steps} routes={routes} setRoutes={setRoutes}/>
       </>) : (
       <>
             {posts.map((post: any, index) => {
