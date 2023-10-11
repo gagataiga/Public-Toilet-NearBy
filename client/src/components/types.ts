@@ -1,3 +1,16 @@
+export interface MapProps{
+  isPost:boolean
+}
+
+export interface PostMarkerProps{
+  setIsNavigating: React.Dispatch<React.SetStateAction<boolean>>
+  setDuration: React.Dispatch<React.SetStateAction<number>>
+  setDistance: React.Dispatch<React.SetStateAction<number>>
+  setSteps: React.Dispatch<React.SetStateAction<never[]>>
+  setRoutes: React.Dispatch<React.SetStateAction<[][]>>
+  routes: [][]
+}
+
 export interface TagsProps{
   tags:number[]
   setTags: React.Dispatch<React.SetStateAction<number[]>>

@@ -1,0 +1,9 @@
+.navigator_conrainer{
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  width: 200px;
+  height: 200px;
+  background-color: white;
+  z-index: 900;
+}

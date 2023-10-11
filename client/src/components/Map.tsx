@@ -8,18 +8,19 @@ import "./Map.css"
 import PostBtn from './PostBtn';
 import { User } from '../redux/types';
 import PostMaker from './PostMarker';
+import { MapProps } from './types';
 
-interface Props { 
-  isPost:boolean
-}
-
-
-const Map = (props: Props) => {
+const Map = (props: MapProps) => {
   
   const { isPost } = props;
   const locationState: Location = useAppSelector((state) => state.location);
   const userState: User = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
+  const [routes, setRoutes] = useState<[][]>([]);
+  const [duration, setDuration] = useState(0);
+  const [distance, setDistance] = useState(0);
+  const [steps, setSteps] = useState([]);
+  const [isNavigating, setIsNavigating] = useState<boolean>(false);
 
   useEffect(() => { 
     if ("geolocation" in navigator) {
@@ -28,7 +29,6 @@ const Map = (props: Props) => {
           const lng = position.coords.longitude;
           const lat = position.coords.latitude
           if (lng !== locationState.lng || lat !== locationState.lat) {
-            console.log("成功");
             console.log(lng,lat);
             dispatch(setLocation({ lng: lng, lat: lat}));
           }
@@ -77,7 +77,9 @@ const Map = (props: Props) => {
             />
               <LocationMaker />
               {/* user posts marker should be here */}
-              <PostMaker/>
+                    <PostMaker setDuration={setDuration} setDistance={setDistance} setRoutes={setRoutes} setSteps={setSteps} routes={routes}
+                    setIsNavigating={setIsNavigating}
+                    />
             </MapContainer>
             {userState.isLoggedIn && (<PostBtn/>)}
         </div>
