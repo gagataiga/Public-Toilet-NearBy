@@ -1,3 +1,4 @@
+import L from "leaflet";
 
 export const generateUniqueFileName = () => {
   const randomString = Math.random().toString(36).substring(2, 8);
@@ -16,4 +17,16 @@ export const validateInputs = (image: File | null, tags: number[], ratingValue: 
   }
   
   return true;
+}
+
+export const checkDistance = (from: { lat: number | undefined, lng: number | undefined }, to: { lat: number, lng: number }):number | undefined => { 
+  if (from.lat && from.lng) {
+    const latlng1 = L.latLng(from.lat, from.lng);
+    const latlng2 = L.latLng(to.lat, to.lng);
+    const distance = latlng1.distanceTo(latlng2) ;
+    console.log(distance);
+    return distance;
+  }
+
+  return undefined;
 }

@@ -5,24 +5,43 @@ import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import { Button } from '@mui/material';
+import { checkDistance } from '../utils/util';
 
 const PostMaker = () => {
   const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState<number[]>([]);
   const locationState: Location = useAppSelector((state) => state.location);
   const [routes, setRoutes] = useState<[][]>([]);
+  const [duration, setDuration] = useState(0);
+  const [distance, setDistance] = useState(0);
+  const [steps, setSteps] = useState([]);
+
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
     setPosts(response);
   }
   
-  const handleClick = async (lat:number, lng:number) => { 
+  const handleClick = async (lat: number, lng: number) => { 
+    // user location
     const start: string = `${locationState.lng},${locationState.lat}`;
-    const end:string = `${lng},${lat}`;
+    //destination
+    const end: string = `${lng},${lat}`;
     const result = await getNavigation(start, end);
-    console.log(result);
+
     const routesArray = result.features[0].geometry.coordinates;
+    const dis = result.features[0].properties.segments[0].distance;
+    const dur = result.features[0].properties.segments[0].duration;
+    const navSteps = result.features[0].properties.segments[0].steps;
+
+     const distance = checkDistance({ lat: locationState.lat, lng: locationState.lng}, { lat: lat, lng: lng })
+
+    console.log(distance);
+    
+    setDuration(dur);
+    setDistance(dis); 
+    setSteps(navSteps);
+
     console.log(routesArray);
     const reversedRoutes = routesArray.map((route:any) => [route[1],route[0]]);
     console.log(reversedRoutes);
@@ -31,6 +50,7 @@ const PostMaker = () => {
     setDestination([lng, lat]);
   }
 
+  
   useEffect(() => {
     fetchAllPosts();
   }, []);
@@ -51,7 +71,7 @@ const PostMaker = () => {
                 <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
                   <Popup>
                     
-                    <Button onClick={() => handleClick(post.latitude, post.longitude)}>Do you want to go there ?</Button>
+                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude)}>Do you want to go there ?</Button>
                   </Popup>
                 </Marker>
               );

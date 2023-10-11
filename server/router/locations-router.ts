@@ -27,7 +27,7 @@ router.get("/navigation", async (req: Request, res: Response) => {
     res.status(200).send(data);
   }catch(error){
     console.log(error);
-    res.status(400).send("bad request");
+    res.status(400).send("bad");
   }
 });
 
