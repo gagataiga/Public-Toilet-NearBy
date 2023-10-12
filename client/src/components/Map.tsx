@@ -24,7 +24,6 @@ const Map = (props: MapProps) => {
           const lng = position.coords.longitude;
           const lat = position.coords.latitude
           if (lng !== locationState.lng || lat !== locationState.lat) {
-            console.log(lng,lat);
             dispatch(setLocation({ lng: lng, lat: lat}));
           }
         },
@@ -34,7 +33,7 @@ const Map = (props: MapProps) => {
         }
       );
     } else {
-      console.log("Geolocation is not supported by your browser");
+      alert("Geolocation is not supported by your browser");
     }
   }, []); 
   

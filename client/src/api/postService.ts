@@ -25,7 +25,7 @@ export const imageUploader = async (selectedFile: File): Promise<string | undefi
       console.log("upload is successed");
       return downLoadURL;
     } catch (error) {
-      console.log(error);
+      console.error(error);
       console.log("upload is not successed");
     }
   }

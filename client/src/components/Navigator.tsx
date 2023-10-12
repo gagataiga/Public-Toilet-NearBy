@@ -21,20 +21,14 @@ const Navigator = (props: NavigatorProps) => {
     const from = { lat: locationState.lat, lng: locationState.lng };
     // const from = { lat: routes[steps[currentStep].way_points[1]][0], lng: routes[steps[currentStep].way_points[1]][1] }
     const to = { lat: routes[steps[currentStep].way_points[1]][0], lng: routes[steps[currentStep].way_points[1]][1] }
-    console.log("from", from);
-    console.log("to", to);
     //55.16667358929872... 
     let isCloseToNext = checkDistance(from, to);
-    console.log("distance from there to next point", isCloseToNext);
-
     // user current location is close to the point 
     if (isCloseToNext) { 
       setSteps(steps.filter((step, index) => { 
         return index !== 0;
       }));
     }
-
-    console.log(steps);
 
   },[]);
 
@@ -48,7 +42,6 @@ const Navigator = (props: NavigatorProps) => {
       <div className='nav_container'>
           {steps.map((step: NavStep, key: number) => {
             const distanceToNextPoint = formatDistance(step.distance);
-            console.log(key);
             return (
               <div key={key} className='nav_step'>
                 {step.instruction}

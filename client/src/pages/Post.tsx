@@ -48,7 +48,6 @@ function Post() {
       try {
         // upload user location and user posts
         const uploadedLocation = await locationUploader({ longitude: locationState.lng, latitude: locationState.lat });
-        console.log(uploadedLocation.location_id);
           // submit post
         const userPost = {
             comment: comment,
@@ -59,9 +58,7 @@ function Post() {
             image_url: userImgUrl,
             rating: ratingValue
           }
-        console.log(userPost);
         const response = await postUploader(userPost);
-        console.log(response);
       } catch(error) { 
         console.error(error);
       }

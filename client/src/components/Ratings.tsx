@@ -6,8 +6,6 @@ const
   Ratings = ({ ratingValue, setRating }: RatingProps) => {
   
   const handleRatingChange = (event: React.SyntheticEvent<Element, Event>, newValue: number | null) => {
-    console.log("選択",newValue);
-    console.log("現在の",ratingValue);
     if (newValue !== null) {
       setRating(newValue);
     }

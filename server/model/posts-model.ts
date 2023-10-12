@@ -17,10 +17,8 @@ module.exports = {
         image_url: post.image_url,
         rating: post.rating
       }
-      console.log("yay",data);
       
       const response = await postsKnex(POSTS_TABLE).insert(data);
-      console.log(response);
       return response;
     } catch (error) {
       throw error;

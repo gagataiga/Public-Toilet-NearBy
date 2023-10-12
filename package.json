@@ -4,14 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon --exec ts-node ./server/index.ts",
+    "build": "npm install && npm run compile && npm run env-copy && cd dist && npm run migration && npm run seed && cd ../client && npm install && npm run build",
+    "start": "node ./dist/server/index.js",
+    "compile": "npx tsc",
+    "env-copy": "cp ./.env ./dist/.env",
+    "migration": "knex migrate:latest",
+    "seed": "knex  seed:run",
+    "dev": "nodemon --exec ts-node ./server/index.ts",
     "client": "cd client && npm run start",
     "client-test": "cd client && npm run test",
-    "backend-test": "mocha --require ts-node/register test/**/*.ts",
-    "ts-node": "./node_modules/.bin/ts-node",
-    "migration": "knex migrate:latest",
-    "seed": "knex  seed:run"
+    "backend-test": "mocha --require ts-node/register test/**/*.ts"
   },
   "author": "",
   "license": "ISC",

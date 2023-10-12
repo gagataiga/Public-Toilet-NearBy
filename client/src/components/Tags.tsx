@@ -10,7 +10,6 @@ const Tags = ({ tags, setTags }:TagsProps) => {
       setTags(tags.filter((selectedTag) => selectedTag !== tagNum));
     } else {
       setTags([...tags, tagNum]);
-      console.log(tags);
     }
   };
 

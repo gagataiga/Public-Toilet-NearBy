@@ -3,6 +3,8 @@ const usersRouter = require("./router/users-router");
 const locationsRouter = require("./router/locations-router");
 const postsRouter = require("./router/posts-router");
 const cors = require("cors");
+const path = require("path");
+
 
 export const setUpServer = () => { 
   const app = express();
@@ -12,6 +14,7 @@ export const setUpServer = () => {
   //   credentials: true, // auth info
   //   optionsSuccessStatus: 204, // status
   // }));
+  app.use(express.static(path.resolve(__dirname, '../client/build')));
   app.use(express.json());
   // user 
   app.use("/users", usersRouter);

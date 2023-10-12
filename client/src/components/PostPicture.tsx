@@ -11,11 +11,8 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
     
     const file = e.target.files;
     if (file && file[0]) {
-      console.log(file[0]);
       const objecUrl = URL.createObjectURL(file[0]);
       setImage(file[0]);// setimagefile
-      console.log("image", image);
-      console.log(objecUrl);
       setImageURL(objecUrl);
     }
   };
