@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+import React, { useEffect,  } from 'react'
+import { MapContainer, TileLayer, MapContainerProps} from "react-leaflet";
 import LocationMaker from './LocationMarker';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setLocation } from '../redux/locationSlice';
@@ -9,6 +9,10 @@ import PostBtn from './PostBtn';
 import { User } from '../redux/types';
 import PostMaker from './PostMarker';
 import { MapProps } from './types';
+
+interface CustomMapContainerProps extends MapContainerProps {
+  center: [number, number];
+}
 
 const Map = (props: MapProps) => {
   
