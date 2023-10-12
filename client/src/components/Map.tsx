@@ -45,7 +45,9 @@ const Map = (props: MapProps) => {
           {(locationState.lng === undefined) ? (
             <div className='post-map_container skeleton-loader'></div>
           ) : (
-          <div className='post-map'>
+            <div className='post-map'>
+             // eslint-disable-next-line
+             //@ts-ignore 
             <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? [locationState.lng, locationState.lat ] : [51.505, -0.09]} zoom={15}>
              <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -63,7 +65,9 @@ const Map = (props: MapProps) => {
         <div className='map_container skeleton-loader'></div>
       ):
         (
-        <div className='map'>
+          <div className='map'>
+          // eslint-disable-next-line
+          //@ts-ignore 
           <MapContainer className='map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
