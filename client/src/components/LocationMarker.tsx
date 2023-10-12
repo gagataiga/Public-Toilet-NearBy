@@ -5,10 +5,10 @@ import { Location } from '../common/types';
 
 const LocationMaker = () => {
   const locationState: Location = useAppSelector((state) => state.location);
-
+  const radius: number = 30;
   return (
     <div>
-      <Circle center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} radius={30}>
+      <Circle center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} radius={radius}>
          <Marker position={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat} : [51.505, -0.09]} >
         <Popup >
           <div style={{height: "100", width: "auto", fontSize:"30px",overflow:  "auto"}}>
