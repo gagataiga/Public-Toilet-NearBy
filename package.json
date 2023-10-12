@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && ../client && npm install && npm run build",
+    "build": "npm install && ./client && npm install && npm run build",
     "start": "npx tsc && npm run env-copy && cd dist && npm run migration && npm run seed && node ./dist/server/index.js",
     "env-copy": "cp ./.env ./dist/.env",
     "migration": "knex migrate:latest",
