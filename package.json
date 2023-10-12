@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm install && npx typescript",
-    "start": "dist/server/index.js",
+    "start": "node ./dist/server/index.js",
     "env-copy": "cp ./.env ./dist/.env",
     "migration": "knex migrate:latest",
     "seed": "knex  seed:run",
