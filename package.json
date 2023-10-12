@@ -6,7 +6,7 @@
   "scripts": {
     "build": "npm install && npm run compile && npm run env-copy && cd dist && npm run migration && npm run seed && cd ../client && npm install && npm run build",
     "start": "node ./dist/server/index.js",
-    "compile": "npm install -g typescript && node_modules/typescript/bin/tsc",
+    "compile": "npm install typescript --save-dev && node_modules/typescript/bin/tsc",
     "env-copy": "cp ./.env ./dist/.env",
     "migration": "knex migrate:latest",
     "seed": "knex  seed:run",
