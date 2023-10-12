@@ -1,6 +1,5 @@
 import React, {useEffect } from 'react';
 import './App.css';
-import Cookies from 'js-cookie';
 import Home from './pages/Home';
 import Landing from './pages/Landing';
 import Header from './components/Header';
