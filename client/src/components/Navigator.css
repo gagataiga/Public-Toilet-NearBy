@@ -9,14 +9,18 @@
   border: 1px solid black;
   border-radius: 10px;
   box-shadow: 1px 1px 3px #2f2f2f ;
-  font-size: 15px ;
+  font-size: 18px ;
+  font-weight: large;
 }
 
 .dur-dis_conrainer{
   border: 1px solid black;
 }
 
-.nav_container{
+.nav_step{
   border: 1px solid black;
-  text-align: center;
+}
+
+.nav_step:nth-child(n + 3){
+  display: none;
 }

@@ -5,9 +5,10 @@ export interface MapProps{
 export interface NavigatorProps{
   distance: number
   duration: number
-  steps: never[]
-  routes: [][]
-  setRoutes: React.Dispatch<React.SetStateAction<[][]>>
+  steps: NavStep[]
+  routes: any
+  setRoutes: React.Dispatch<React.SetStateAction<any>>
+  setSteps: React.Dispatch<React.SetStateAction<NavStep[]>>
 }
 
 export interface TagsProps{
@@ -48,4 +49,13 @@ export interface Post{
   imageURL: string
   toiletFee: string
   comment: string
+}
+
+export interface NavStep {
+  distance: number;
+  duration: number;
+  type: number;
+  instruction: string;
+  name: string;
+  way_points: [number, number];
 }

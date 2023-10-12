@@ -6,16 +6,19 @@ import { useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import { Button } from '@mui/material';
 import Navigator from './Navigator';
+import { NavStep} from './types';
+import { LatLngExpression } from 'leaflet';
 
 const PostMaker = () => {
   // props
-  const [routes, setRoutes] = useState<[][]>([]);
+  const [routes, setRoutes] = useState([]);
   const [duration, setDuration] = useState(0);
   const [distance, setDistance] = useState(0);
-  const [steps, setSteps] = useState([]);
+  const [steps, setSteps] = useState<NavStep[]>([]);
   const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState<number[]>([]);
   const locationState: Location = useAppSelector((state) => state.location);
+  // const convertedRoutes: LatLngExpression[] = routes.map((route):LatLngExpression => [route[0],route[1]]);
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
@@ -35,12 +38,10 @@ const PostMaker = () => {
     const dur = result.features[0].properties.segments[0].duration;
     // navigation 
     const navSteps = result.features[0].properties.segments[0].steps;
-    // const distance = checkDistance({ lat: locationState.lat, lng: locationState.lng}, { lat: lat, lng: lng })    
+    
     setDuration(dur);
     setDistance(dis); 
     setSteps(navSteps);
-    // setIsNavigating(true);
-
     // [ [lng,lat] ....] => [ [lat, lng] ..... ];
     const reversedRoutes = routesArray.map((route:any) => [route[1],route[0]]);    
     setRoutes(reversedRoutes);
@@ -59,8 +60,8 @@ const PostMaker = () => {
               your destination
           </Popup>
         </Marker>
-        <Polyline positions={routes} color="blue" />
-        <Navigator distance={distance} duration={duration} steps={steps} routes={routes} setRoutes={setRoutes}/>
+        <Polyline positions={routes} color="red" />
+        <Navigator distance={distance} duration={duration} steps={steps} routes={routes} setRoutes={setRoutes} setSteps={setSteps}/>
       </>) : (
       <>
             {posts.map((post: any, index) => {
