@@ -39,7 +39,7 @@ export const locationUploader = async (location:{longitude: number | undefined,l
   }
 
   try {
-    const response = await axios.post(`${apiUrl}locations/`,location);
+    const response = await axios.post(`/locations/`,location);
     return response.data;
   } catch (error) {
     console.error(error);
@@ -48,7 +48,7 @@ export const locationUploader = async (location:{longitude: number | undefined,l
 
 export const postUploader = async(post:UserPost) => {
   try {
-    const response = await axios.post(`${apiUrl}posts/`, post);
+    const response = await axios.post(`/posts/`, post);
     return response;
   } catch (error) {
     console.error(error);
@@ -57,7 +57,7 @@ export const postUploader = async(post:UserPost) => {
 
 export const getAllPosts = async () => { 
   try {
-    const response = await axios.get(`${apiUrl}posts/`);
+    const response = await axios.get(`posts/`);
     return response.data;
   } catch (error) {
     console.error(error);

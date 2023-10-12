@@ -1,3 +1,16 @@
+export interface MapProps{
+  isPost:boolean
+}
+
+export interface NavigatorProps{
+  distance: number
+  duration: number
+  steps: NavStep[]
+  routes: any
+  setRoutes: React.Dispatch<React.SetStateAction<any>>
+  setSteps: React.Dispatch<React.SetStateAction<NavStep[]>>
+}
+
 export interface TagsProps{
   tags:number[]
   setTags: React.Dispatch<React.SetStateAction<number[]>>
@@ -36,4 +49,13 @@ export interface Post{
   imageURL: string
   toiletFee: string
   comment: string
+}
+
+export interface NavStep {
+  distance: number;
+  duration: number;
+  type: number;
+  instruction: string;
+  name: string;
+  way_points: [number, number];
 }

@@ -19,14 +19,31 @@ export const validateInputs = (image: File | null, tags: number[], ratingValue: 
   return true;
 }
 
-export const checkDistance = (from: { lat: number | undefined, lng: number | undefined }, to: { lat: number, lng: number }):number | undefined => { 
+export const checkDistance = (from: { lat: number | undefined, lng: number | undefined }, to: { lat: number, lng: number }):boolean => { 
   if (from.lat && from.lng) {
+    // 
     const latlng1 = L.latLng(from.lat, from.lng);
     const latlng2 = L.latLng(to.lat, to.lng);
     const distance = latlng1.distanceTo(latlng2) ;
-    console.log(distance);
-    return distance;
+    console.log("distance", distance);
+    if (distance < 2) {
+      return true;
+    } 
   }
+  return false;
+}
 
-  return undefined;
+export const changeToMinutes = (seconds:number) => { 
+    const minutes = Math.floor(seconds / 60);
+    return minutes;
+}
+
+export const formatDistance = (distance: number) => {
+  // when the user is within a radius of 2M of point x
+  if (distance >= 1000) {
+      const kilometers = (distance / 1000).toFixed(1);
+      return `${kilometers} Km` 
+  } else {
+    return `${distance} m` ;
+  }
 }
