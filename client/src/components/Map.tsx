@@ -9,8 +9,6 @@ import PostBtn from './PostBtn';
 import { User } from '../redux/types';
 import PostMaker from './PostMarker';
 import { MapProps } from './types';
-import { LatLng } from 'leaflet';
-
 
 const Map = (props: MapProps) => {
   
@@ -19,7 +17,7 @@ const Map = (props: MapProps) => {
   const userState: User = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   // const [center, setCenter] = useState<>([0,0]);
-  const center = new LatLng(51.505, -0.09);
+  const center: [number, number] = [51.505, -0.09];
   useEffect(() => { 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
