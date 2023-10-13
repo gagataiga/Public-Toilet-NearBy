@@ -19,6 +19,9 @@ const Map = (props) => {
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   // const [center, setCenter] = useState<>([0,0]);
+  console.log("locationState",locationState);
+  console.log("useState", useState);
+  
   useEffect(() => { 
     if ("geolocation" in navigator) {
       navigator.geolocation.getCurrentPosition(
