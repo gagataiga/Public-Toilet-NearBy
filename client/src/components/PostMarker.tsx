@@ -7,7 +7,6 @@ import { Location } from '../common/types';
 import { Button } from '@mui/material';
 import Navigator from './Navigator';
 import { NavStep} from './types';
-import { LatLngExpression } from 'leaflet';
 
 const PostMaker = () => {
   // props
@@ -18,7 +17,6 @@ const PostMaker = () => {
   const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState<number[]>([]);
   const locationState: Location = useAppSelector((state) => state.location);
-  // const convertedRoutes: LatLngExpression[] = routes.map((route):LatLngExpression => [route[0],route[1]]);
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
