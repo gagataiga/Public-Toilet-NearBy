@@ -4,10 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && npx typescript && npm run migration && npm run seed",
+    "build": "npm install && npx typescript && npm run migration-production && npm run seed-production",
     "start": "node ./dist/server/index.js",
     "env-copy": "cp ./.env ./dist/.env",
     "migration": "knex migrate:latest",
+    "seed-production": "knex seed:run --knexfile dist/knexfile.js",
     "migration-production": "knex migrate:latest --knexfile ./dist/knexfile.js",
     "seed": "knex seed:run",
     "dev": "nodemon --exec ts-node ./server/index.ts",
