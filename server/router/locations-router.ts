@@ -22,14 +22,14 @@ router.get("/navigation", async (req: Request, res: Response) => {
     const { start, end } = req.query;
     const key = process.env.OPEN_ROUTE_API_KEY;
     const URL = `https://api.openrouteservice.org/v2/directions/foot-walking`
-    const data = await axios.get(URL, {
+    const response = await axios.get(URL, {
       params: {
         api_key: key,
         start: start,
         end: end
       }
     });
-    res.status(200).send(data);
+    res.status(200).send(response.data);
   }catch(error){
     console.error(error);
     res.status(400).send("bad");
