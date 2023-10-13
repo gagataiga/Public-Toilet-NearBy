@@ -3,13 +3,14 @@ import { useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import "./Navigator.css";
 import { NavStep, NavigatorProps } from './types';
-import { changeToMinutes, checkDistance, formatDistance } from "../utils/util";
+import { changeToMinutes, formatDistance } from "../utils/util";
+import { checkDistance } from '../utils/location';
 import { Button } from '@mui/material';
 
 const Navigator = (props: NavigatorProps) => {
   const { distance, duration, steps, routes, setRoutes , setSteps } = props;
   const locationState: Location = useAppSelector((state) => state.location);
-  const timeRequired: number = changeToMinutes(duration);
+  const timeRequired = changeToMinutes(duration);
   const formatedDistance = formatDistance(distance);
   const currentStep:number = 0;
 
