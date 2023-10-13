@@ -5,16 +5,17 @@ const postsRouter = require("./router/posts-router");
 const cors = require("cors");
 const path = require("path");
 
+require("dotenv").config(); // .envファイルを読み込む
 
 export const setUpServer = () => { 
   const app = express();
-  // app.use(cors({
-  //   origin: 'http://localhost:3000', // reaxt app origin
-  //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // http method
-  //   credentials: true, // auth info
-  //   optionsSuccessStatus: 204, // status
-  // }));
-  app.use(express.static(path.resolve(__dirname, '../client/build')));
+  app.use(cors({
+    origin: process.env.WEB_SERVER_URL, // reaxt app origin
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // http method
+    credentials: true, // auth info
+    optionsSuccessStatus: 204, // status
+  }));
+  app.use(express.static(path.resolve(__dirname, '../../client/build')));
   app.use(express.json());
   // user 
   app.use("/users", usersRouter);
