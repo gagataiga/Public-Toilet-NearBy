@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npm install && npx typescript && npm run migration-production && npm run seed-production && cd client && npm install && npm run build",
+    "build": "npm install && npx typescript && npm run migration-production && cd client && npm install && npm run build",
     "start": "node ./dist/server/index.js",
     "env-copy": "cp ./.env ./dist/.env",
     "migration": "knex migrate:latest",
@@ -36,6 +36,7 @@
     "@types/knex": "^0.16.1",
     "@types/multer": "^1.4.8",
     "@types/node-cache": "^4.2.5",
+    "axios": "^1.5.1",
     "cors": "^2.8.5",
     "dotenv": "^16.3.1",
     "express": "^4.18.2",

@@ -3,6 +3,8 @@ import { Request, Response, request } from "express";
 const express = require("express");
 const router = express.Router();
 const locationModel = require("../model/locations-model");
+const axios = require('axios');
+const path = require("path");
 
 router.post("/",async (req:Request, res:Response) => {
   try {
@@ -19,9 +21,14 @@ router.get("/navigation", async (req: Request, res: Response) => {
   try { 
     const { start, end } = req.query;
     const key = process.env.OPEN_ROUTE_API_KEY;
-    const URL = `https://api.openrouteservice.org/v2/directions/foot-walking?api_key=${key}&start=${start}&end=${end}`
-    const result = await fetch(URL);
-    const data = await result.json();
+    const URL = `https://api.openrouteservice.org/v2/directions/foot-walking`
+    const data = await axios.get(URL, {
+      params: {
+        api_key: key,
+        start: start,
+        end: end
+      }
+    });
     res.status(200).send(data);
   }catch(error){
     console.error(error);
