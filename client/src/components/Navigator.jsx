@@ -1,17 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../redux/hooks';
-import { Location } from '../common/types';
 import "./Navigator.css";
-import { NavStep, NavigatorProps } from './types';
 import { changeToMinutes, checkDistance, formatDistance } from "../utils/util";
 import { Button } from '@mui/material';
 
-const Navigator = (props: NavigatorProps) => {
+const Navigator = (props) => {
   const { distance, duration, steps, routes, setRoutes , setSteps } = props;
-  const locationState: Location = useAppSelector((state) => state.location);
-  const timeRequired: number = changeToMinutes(duration);
+  const locationState = useAppSelector((state) => state.location);
+  const timeRequired = changeToMinutes(duration);
   const formatedDistance = formatDistance(distance);
-  const currentStep:number = 0;
+  const currentStep = 0;
 
   const handleNavigation = () => { 
     setRoutes([]);
@@ -40,7 +38,7 @@ const Navigator = (props: NavigatorProps) => {
       </div>
       
       <div className='nav_container'>
-          {steps.map((step: NavStep, key: number) => {
+          {steps.map((step, key) => {
             const distanceToNextPoint = formatDistance(step.distance);
             return (
               <div key={key} className='nav_step'>
