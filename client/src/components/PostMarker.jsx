@@ -3,31 +3,29 @@ import { getAllPosts } from '../api/postService';
 import { Marker, Polyline, Popup } from "react-leaflet";
 import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
-import { Location } from '../common/types';
 import { Button } from '@mui/material';
 import Navigator from './Navigator';
-import { NavStep} from './types';
 
 const PostMaker = () => {
   // props
   const [routes, setRoutes] = useState([]);
   const [duration, setDuration] = useState(0);
   const [distance, setDistance] = useState(0);
-  const [steps, setSteps] = useState<NavStep[]>([]);
+  const [steps, setSteps] = useState([]);
   const [posts, setPosts] = useState([]);
-  const [destination, setDestination] = useState<number[]>([]);
-  const locationState: Location = useAppSelector((state) => state.location);
+  const [destination, setDestination] = useState([]);
+  const locationState = useAppSelector((state) => state.location);
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
     setPosts(response);
   }
   
-  const handleClick = async (lat: number, lng: number) => { 
+  const handleClick = async (lat, lng) => { 
     // user location
-    const start: string = `${locationState.lng},${locationState.lat}`;
+    const start = `${locationState.lng},${locationState.lat}`;
     // destination
-    const end: string = `${lng},${lat}`;
+    const end = `${lng},${lat}`;
     const result = await getNavigation(start, end);
     const routesArray = result.features[0].geometry.coordinates;
     // the distance between user current location and the destination
@@ -41,7 +39,7 @@ const PostMaker = () => {
     setDistance(dis); 
     setSteps(navSteps);
     // [ [lng,lat] ....] => [ [lat, lng] ..... ];
-    const reversedRoutes = routesArray.map((route:any) => [route[1],route[0]]);    
+    const reversedRoutes = routesArray.map((route) => [route[1],route[0]]);    
     setRoutes(reversedRoutes);
     setDestination([lng, lat]);
   }
@@ -58,11 +56,11 @@ const PostMaker = () => {
               your destination
           </Popup>
         </Marker>
-        <Polyline positions={routes} color="red" />
+        <Polyline positions={routes} color={"red"} />
         <Navigator distance={distance} duration={duration} steps={steps} routes={routes} setRoutes={setRoutes} setSteps={setSteps}/>
       </>) : (
       <>
-            {posts.map((post: any, index) => {
+            {posts.map((post, index) => {
               return (
                 <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
                   <Popup>
