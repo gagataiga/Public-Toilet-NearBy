@@ -6,6 +6,8 @@ import { useAppSelector } from '../redux/hooks';
 import { Button } from '@mui/material';
 import Navigator from './Navigator';
 import UserPost from './UserPost';
+import "./PostMarker.css";
+
 
 const PostMaker = () => {
   // props
@@ -68,9 +70,9 @@ const PostMaker = () => {
             {posts.map((post, index) => {
               return (
                 <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
-                  <Popup>
+                  <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
                     <UserPost post={post}/>
-                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude, post)}>Do you want to go there ?</Button>
+                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude, post)}>Navigate</Button>
                   </Popup>
                 </Marker>
               );
