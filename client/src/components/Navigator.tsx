@@ -25,13 +25,15 @@ const Navigator = (props: NavigatorProps) => {
     //55.16667358929872... 
     let isCloseToNext = checkDistance(from, to);
     // user current location is close to the point 
-    if (isCloseToNext) { 
-      setSteps(steps.filter((step, index) => { 
+    if (isCloseToNext) {
+      console.log("userが近くのローケションに移動しました");
+      setSteps(steps.filter((step, index) => {
         return index !== 0;
       }));
+    } else { 
+      console.log("userはまだ近くについていません")
     }
-
-  },[]);
+  },[locationState.lat, locationState.lng]);
 
     return (
     <div className='navigator_conrainer'>
