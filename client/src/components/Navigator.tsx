@@ -7,7 +7,7 @@ import { changeToMinutes, formatDistance } from "../utils/util";
 import { checkDistance } from '../utils/location';
 import { Button } from '@mui/material';
 import { User } from '../redux/types';
-import { enableIsLoggedIn } from '../redux/authSlice';
+import { disableIsLoggedIn, enableIsLoggedIn } from '../redux/authSlice';
 
 const Navigator = (props: NavigatorProps) => {
   const { distance, duration, steps, routes, setRoutes , setSteps } = props;
@@ -20,10 +20,6 @@ const Navigator = (props: NavigatorProps) => {
 
   const handleNavigation = () => { 
     setRoutes([]);
-    // if user is logged in isloggedIn true
-    if (userState.fb_uid) {
-      dispatch(enableIsLoggedIn());
-    }
   }
 
   useEffect(() => {
@@ -42,6 +38,18 @@ const Navigator = (props: NavigatorProps) => {
       console.log("user is not close to the next step")
     }
   },[locationState.lat, locationState.lng]);
+
+  useEffect(() => {
+    dispatch(disableIsLoggedIn());
+
+    return () => {
+      console.log('Component is unmounted!');
+
+      if (userState.fb_uid) {
+        dispatch(enableIsLoggedIn());
+      }
+    };
+  },[]);
 
     return (
     <div className='navigator_conrainer'>

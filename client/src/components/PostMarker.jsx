@@ -8,7 +8,6 @@ import Navigator from './Navigator';
 import UserPost from './UserPost';
 import "./PostMarker.css";
 import { useAppDispatch } from '../redux/hooks';
-import { disableIsLoggedIn } from '../redux/authSlice';
 
 const PostMaker = () => {
   // props
@@ -20,7 +19,6 @@ const PostMaker = () => {
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
   const [post, setPostSelected] = useState([]);
-  const dispatch = useAppDispatch();
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
@@ -51,7 +49,6 @@ const PostMaker = () => {
     const reversedRoutes = routesArray.map((route) => [route[1],route[0]]);    
     setRoutes(reversedRoutes);
     setDestination([lng, lat]);
-    dispatch(disableIsLoggedIn());
   }
 
   useEffect(() => {
