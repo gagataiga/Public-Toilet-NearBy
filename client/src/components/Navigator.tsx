@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import "./Navigator.css";
 import { NavStep, NavigatorProps } from './types';
 import { changeToMinutes, formatDistance } from "../utils/util";
 import { checkDistance } from '../utils/location';
 import { Button } from '@mui/material';
+import { User } from '../redux/types';
+import { enableIsLoggedIn } from '../redux/authSlice';
 
 const Navigator = (props: NavigatorProps) => {
   const { distance, duration, steps, routes, setRoutes , setSteps } = props;
@@ -13,9 +15,15 @@ const Navigator = (props: NavigatorProps) => {
   const timeRequired = changeToMinutes(duration);
   const formatedDistance = formatDistance(distance);
   const currentStep:number = 0;
+  const userState: User = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
 
   const handleNavigation = () => { 
     setRoutes([]);
+    // if user is logged in isloggedIn true
+    if (userState.fb_uid) {
+      dispatch(enableIsLoggedIn());
+    }
   }
 
   useEffect(() => {
@@ -65,3 +73,4 @@ const Navigator = (props: NavigatorProps) => {
 }
 
 export default Navigator
+

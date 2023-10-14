@@ -7,7 +7,8 @@ import { Button } from '@mui/material';
 import Navigator from './Navigator';
 import UserPost from './UserPost';
 import "./PostMarker.css";
-
+import { useAppDispatch } from '../redux/hooks';
+import { disableIsLoggedIn } from '../redux/authSlice';
 
 const PostMaker = () => {
   // props
@@ -19,6 +20,7 @@ const PostMaker = () => {
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
   const [post, setPostSelected] = useState([]);
+  const dispatch = useAppDispatch();
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
@@ -27,7 +29,7 @@ const PostMaker = () => {
   
   console.log(posts);
 
-  const handleClick = async (lat, lng, post) => { 
+  const handleNavigateClick = async (lat, lng, post) => { 
     setPostSelected(post);
     // user location
     const start = `${locationState.lng},${locationState.lat}`;
@@ -49,6 +51,7 @@ const PostMaker = () => {
     const reversedRoutes = routesArray.map((route) => [route[1],route[0]]);    
     setRoutes(reversedRoutes);
     setDestination([lng, lat]);
+    dispatch(disableIsLoggedIn());
   }
 
   useEffect(() => {
@@ -76,7 +79,7 @@ const PostMaker = () => {
                     <button className='review-btn'>Would you like to see Reviews?</button>
                     </div>
                     <div className='navigate-btn_container'>
-                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude, post)}>Navigate</Button>
+                    <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
                     </div>
                   </Popup>
                 </Marker>

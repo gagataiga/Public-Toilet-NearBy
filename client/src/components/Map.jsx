@@ -20,7 +20,7 @@ const Map = (props) => {
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
   // const [center, setCenter] = useState<>([0,0]);
-
+  console.log(userState);
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
       if ("geolocation" in navigator) {
