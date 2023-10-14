@@ -20,8 +20,6 @@ const Map = (props) => {
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
   // const [center, setCenter] = useState<>([0,0]);
-  console.log("defaultUserLocation", defaultUserLocation);
-  console.log("locationState", locationState);
 
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
@@ -53,19 +51,27 @@ const Map = (props) => {
   
 useEffect(() => {
   // watch users location
-  if (!isPost) {
-    const watchId = navigator.geolocation.watchPosition(
-      (position) => {
-        const lng = position.coords.longitude;
-        const lat = position.coords.latitude;
-        console.log("user current location is being watched");
-        dispatch(setLocation({ lng: lng, lat: lat }));
-      },
+  let watchId;
+  if(navigator.geolocation) {
+    if (!isPost) {
+    watchId = navigator.geolocation.watchPosition(
+        (position) => {
+          const lng = position.coords.longitude;
+          const lat = position.coords.latitude;
+          alert(lng + " :::: " + lat);
+          console.log("user current location is being watched");
+          dispatch(setLocation({ lng: lng, lat: lat }));
+          console.log("location state", locationState);
+        },
       (error) => {
         console.error("Error getting user location: ", error);
       }
     );
    
+  }
+  else {
+    alert("we are not able to check your location");
+  }
     // unwatch
     return () => {
         navigator.geolocation.clearWatch(watchId);
