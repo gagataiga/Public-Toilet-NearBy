@@ -5,6 +5,7 @@ import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
 import { Button } from '@mui/material';
 import Navigator from './Navigator';
+import UserPost from './UserPost';
 
 const PostMaker = () => {
   // props
@@ -15,6 +16,7 @@ const PostMaker = () => {
   const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
+  const [post, setPostSelected] = useState([]);
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
@@ -22,7 +24,9 @@ const PostMaker = () => {
   }
   
   console.log(posts);
-  const handleClick = async (lat, lng) => { 
+
+  const handleClick = async (lat, lng, post) => { 
+    setPostSelected(post);
     // user location
     const start = `${locationState.lng},${locationState.lat}`;
     // destination
@@ -65,7 +69,8 @@ const PostMaker = () => {
               return (
                 <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
                   <Popup>
-                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude)}>Do you want to go there ?</Button>
+                    <UserPost post={post}/>
+                    <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude, post)}>Do you want to go there ?</Button>
                   </Popup>
                 </Marker>
               );
