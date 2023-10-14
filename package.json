@@ -12,6 +12,7 @@
     "migration-production": "knex migrate:latest --knexfile ./dist/knexfile.js",
     "seed": "knex seed:run",
     "dev": "nodemon --exec ts-node ./server/index.ts",
+    "production": "nodemon ./dist/server/index.js",
     "client": "cd client && npm run start",
     "client-test": "cd client && npm run test",
     "backend-test": "mocha --require ts-node/register test/**/*.ts"

@@ -25,13 +25,15 @@ const Navigator = (props: NavigatorProps) => {
     //55.16667358929872... 
     let isCloseToNext = checkDistance(from, to);
     // user current location is close to the point 
-    if (isCloseToNext) { 
-      setSteps(steps.filter((step, index) => { 
+    if (isCloseToNext) {
+      console.log("userが近くのnext stepに移動しました");
+      setSteps(steps.filter((step, index) => {
         return index !== 0;
       }));
+    } else { 
+      console.log("userはまだ近くのnext stepについていません")
     }
-
-  },[]);
+  },[locationState.lat, locationState.lng]);
 
     return (
     <div className='navigator_conrainer'>
@@ -40,15 +42,15 @@ const Navigator = (props: NavigatorProps) => {
        ( {formatedDistance} )
       </div>
       
-      <div className='nav_container'>
-          {steps.map((step: NavStep, key: number) => {
+        <div className='nav_container'>
+          {/* {steps.map((step: NavStep, key: number) => {
             const distanceToNextPoint = formatDistance(step.distance);
             return (
               <div key={key} className='nav_step'>
                 {step.instruction}
                  ( {distanceToNextPoint} ) 
               </div>)
-          })}
+          })} */}
 
           <div className='nav_step'>
            

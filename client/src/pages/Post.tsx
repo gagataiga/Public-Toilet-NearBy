@@ -18,6 +18,7 @@ function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
   const userState: User = useAppSelector((state) => state.user);
 
+  console.log("user current location",locationState);
   const [image, setImage] = useState<File | null>(null);
   const [tags, setTags] = useState<number[]>([]);
   const [ratingValue, setRating] = useState<number>(3);

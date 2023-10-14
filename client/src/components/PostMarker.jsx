@@ -21,6 +21,7 @@ const PostMaker = () => {
     setPosts(response);
   }
   
+  console.log(posts);
   const handleClick = async (lat, lng) => { 
     // user location
     const start = `${locationState.lng},${locationState.lat}`;
@@ -56,7 +57,7 @@ const PostMaker = () => {
               your destination
           </Popup>
         </Marker>
-        <Polyline positions={routes} color={"red"} />
+        <Polyline positions={routes} color={"green"} />
         <Navigator distance={distance} duration={duration} steps={steps} routes={routes} setRoutes={setRoutes} setSteps={setSteps}/>
       </>) : (
       <>
