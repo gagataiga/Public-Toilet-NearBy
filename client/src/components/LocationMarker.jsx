@@ -10,7 +10,7 @@ const LocationMaker = () => {
       <Circle center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} >
         <Marker position={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat} : [51.505, -0.09]} >
         <Popup >
-          <div style={{height: "100", width: "auto", fontSize:"30px",overflow:  "auto"}}>
+          <div>
           Your location
           </div>
         </Popup>

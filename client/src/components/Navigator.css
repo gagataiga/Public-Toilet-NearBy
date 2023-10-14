@@ -2,20 +2,20 @@
   position: absolute;
   top: 0%;
   right: 0%;
-  width: 220px;
-  height: 125px;
   background-color: white;
   z-index: 900;
-  border: 1px solid black;
   border-radius: 10px;
   box-shadow: 1px 1px 3px #2f2f2f ;
+  border: 1px solid rgb(111, 111, 111);
   font-size: 15px ;
   font-weight: large;
+  text-align: center;
+  margin: 5px;
 }
 
-.dur-dis_conrainer{
-  border: 1px solid black;
-}
+/* .dur-dis_conrainer{
+ 
+} */
 
 .nav_step{
   border: 1px solid black;

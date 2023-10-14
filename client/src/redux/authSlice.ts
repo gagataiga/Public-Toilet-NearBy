@@ -22,6 +22,18 @@ export const authSlice = createSlice({
           isLoggedIn: true
       }
     },
+    disableIsLoggedIn: (state) => {
+      return {
+        ...state,
+        isLoggedIn: false,
+      };
+    },
+    enableIsLoggedIn: (state) => {
+      return {
+        ...state,
+        isLoggedIn: true,
+      };
+    },
     clearUser: (state) => { 
       // everything should be clear
       return {
@@ -88,7 +100,7 @@ export const signOut = () => {
 }
 
 
-export const { setUserAuth } = authSlice.actions;
+export const { setUserAuth , enableIsLoggedIn, disableIsLoggedIn} = authSlice.actions;
 
 export default authSlice.reducer;
 

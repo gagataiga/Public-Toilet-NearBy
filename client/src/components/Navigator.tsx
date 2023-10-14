@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { useAppSelector } from '../redux/hooks';
+import { useAppDispatch, useAppSelector } from '../redux/hooks';
 import { Location } from '../common/types';
 import "./Navigator.css";
 import { NavStep, NavigatorProps } from './types';
 import { changeToMinutes, formatDistance } from "../utils/util";
 import { checkDistance } from '../utils/location';
 import { Button } from '@mui/material';
+import { User } from '../redux/types';
+import { disableIsLoggedIn, enableIsLoggedIn } from '../redux/authSlice';
 
 const Navigator = (props: NavigatorProps) => {
   const { distance, duration, steps, routes, setRoutes , setSteps } = props;
@@ -13,6 +15,8 @@ const Navigator = (props: NavigatorProps) => {
   const timeRequired = changeToMinutes(duration);
   const formatedDistance = formatDistance(distance);
   const currentStep:number = 0;
+  const userState: User = useAppSelector(state => state.user);
+  const dispatch = useAppDispatch();
 
   const handleNavigation = () => { 
     setRoutes([]);
@@ -26,14 +30,26 @@ const Navigator = (props: NavigatorProps) => {
     let isCloseToNext = checkDistance(from, to);
     // user current location is close to the point 
     if (isCloseToNext) {
-      console.log("userが近くのnext stepに移動しました");
+      console.log("user is close to the next step");
       setSteps(steps.filter((step, index) => {
         return index !== 0;
       }));
     } else { 
-      console.log("userはまだ近くのnext stepについていません")
+      console.log("user is not close to the next step")
     }
   },[locationState.lat, locationState.lng]);
+
+  useEffect(() => {
+    dispatch(disableIsLoggedIn());
+
+    return () => {
+      console.log('Component is unmounted!');
+
+      if (userState.fb_uid) {
+        dispatch(enableIsLoggedIn());
+      }
+    };
+  },[]);
 
     return (
     <div className='navigator_conrainer'>
@@ -52,12 +68,12 @@ const Navigator = (props: NavigatorProps) => {
               </div>)
           })} */}
 
-          <div className='nav_step'>
+          {/* <div className='nav_step'>
            
           </div>
           <div className='nav_step'>
            
-          </div>
+          </div> */}
       </div>
       <Button variant="contained" onClick={()=>handleNavigation()}>Stop Navigating</Button>
     </div>
@@ -65,3 +81,4 @@ const Navigator = (props: NavigatorProps) => {
 }
 
 export default Navigator
+

@@ -20,7 +20,7 @@ const Map = (props) => {
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
   // const [center, setCenter] = useState<>([0,0]);
-
+  console.log(userState);
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
       if ("geolocation" in navigator) {
@@ -66,10 +66,6 @@ useEffect(() => {
         console.error("Error getting user location: ", error);
       }
     );
-   
-  }
-  else {
-    alert("we are not able to check your location");
   }
     // unwatch
     return () => {

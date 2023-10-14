@@ -49,7 +49,7 @@ const UserPost = (props) => {
       <fieldset className="post_content">
         <legend className="title">Comment</legend>
         <div className="comment_container">
-          <textarea readOnly name="comment" id="" cols="30" rows="10" defaultValue={comment}>
+          <textarea className="comment_txt" readOnly name="comment" id="" cols="30" rows="10" defaultValue={comment}>
         </textarea >
       </div>
       </fieldset>
