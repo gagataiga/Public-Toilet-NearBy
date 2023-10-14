@@ -26,12 +26,12 @@ const Navigator = (props: NavigatorProps) => {
     let isCloseToNext = checkDistance(from, to);
     // user current location is close to the point 
     if (isCloseToNext) {
-      console.log("userが近くのnext stepに移動しました");
+      console.log("user is close to the next step");
       setSteps(steps.filter((step, index) => {
         return index !== 0;
       }));
     } else { 
-      console.log("userはまだ近くのnext stepについていません")
+      console.log("user is not close to the next step")
     }
   },[locationState.lat, locationState.lng]);
 
@@ -52,12 +52,12 @@ const Navigator = (props: NavigatorProps) => {
               </div>)
           })} */}
 
-          <div className='nav_step'>
+          {/* <div className='nav_step'>
            
           </div>
           <div className='nav_step'>
            
-          </div>
+          </div> */}
       </div>
       <Button variant="contained" onClick={()=>handleNavigation()}>Stop Navigating</Button>
     </div>

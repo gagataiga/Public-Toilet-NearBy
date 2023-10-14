@@ -71,8 +71,13 @@ const PostMaker = () => {
               return (
                 <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
                   <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
-                    <UserPost post={post}/>
+                    <UserPost post={post} />
+                    <div>
+                    <button className='review-btn'>Would you like to see Reviews?</button>
+                    </div>
+                    <div className='navigate-btn_container'>
                     <Button variant="contained" onClick={() => handleClick(post.latitude, post.longitude, post)}>Navigate</Button>
+                    </div>
                   </Popup>
                 </Marker>
               );

@@ -66,10 +66,6 @@ useEffect(() => {
         console.error("Error getting user location: ", error);
       }
     );
-   
-  }
-  else {
-    alert("we are not able to check your location");
   }
     // unwatch
     return () => {

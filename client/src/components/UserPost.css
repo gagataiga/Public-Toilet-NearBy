@@ -1,7 +1,7 @@
 .user-toilet-post_container{
   text-align: center;
   overflow-y: auto; 
-  height: 300px;
+  height: 200px;
   margin: 10px;
   width: 180px;
 }
