@@ -24,7 +24,7 @@ const Map = (props) => {
   console.log("locationState", locationState);
 
   useEffect(() => {
-    if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng) ) {
+    if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
       if ("geolocation" in navigator) {
         navigator.geolocation.getCurrentPosition(
           (position) => {
@@ -45,29 +45,33 @@ const Map = (props) => {
       } else {
         alert("Geolocation is not supported by your browser");
       }
-    // set user current location again for map
-    } else if((locationState.lat && locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
-     setDefaultUserLocation({ lng: locationState.lng, lat: locationState.lat });
+      // set user current location again for map
+    } else if ((locationState.lat && locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
+      setDefaultUserLocation({ lng: locationState.lng, lat: locationState.lat });
     }
 }, []); 
   
 useEffect(() => {
-    if (locationState.lat && locationState.lng) {
-      // watch users location
-      const watchId = navigator.geolocation.watchPosition(
-        (position) => {
-          const lng = position.coords.longitude;
-          const lat = position.coords.latitude;
-          // 
-          console.log("user current location is being watched");
-          dispatch(setLocation({ lng: lng, lat: lat }));
-        },
-        (error) => {
-          console.error("Error getting user location: ", error);
-        }
-      );
-    }
-  }, [locationState.lat,locationState.lng]);
+  // watch users location
+  if (!isPost) {
+    const watchId = navigator.geolocation.watchPosition(
+      (position) => {
+        const lng = position.coords.longitude;
+        const lat = position.coords.latitude;
+        console.log("user current location is being watched");
+        dispatch(setLocation({ lng: lng, lat: lat }));
+      },
+      (error) => {
+        console.error("Error getting user location: ", error);
+      }
+    );
+   
+    // unwatch
+    return () => {
+        navigator.geolocation.clearWatch(watchId);
+    };
+  }
+  }, []);
 
   return (
     <>
