@@ -21,6 +21,7 @@ const PostMaker = () => {
     setPosts(response);
   }
   
+  console.log(posts);
   const handleClick = async (lat, lng) => { 
     // user location
     const start = `${locationState.lng},${locationState.lat}`;

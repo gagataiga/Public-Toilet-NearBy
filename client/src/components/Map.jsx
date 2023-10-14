@@ -50,10 +50,10 @@ const Map = (props) => {
           {(locationState.lng === undefined) ? (
             <div className='post-map_container skeleton-loader'></div>
           ) : (
-            <div className='post-map'>
-                <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? [locationState.lng, locationState.lat] : [51.505, -0.09]} zoom={15}>
-            {/* <MapContainer className='post-map_container' center={center} zoom={15}> */}
-             <TileLayer
+              <div className='post-map'>
+              {console.log("this is post location",locationState.lng, locationState.lat)}
+                <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15}>
+              <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
