@@ -22,7 +22,6 @@ const Map = (props) => {
   // const [center, setCenter] = useState<>([0,0]);
   console.log("defaultUserLocation", defaultUserLocation);
   console.log("locationState", locationState);
-  console.log("useState", useState);
 
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng) ) {
@@ -52,16 +51,15 @@ const Map = (props) => {
     }
 }, []); 
   
-  useEffect(() => {
+useEffect(() => {
     if (locationState.lat && locationState.lng) {
       // watch users location
       const watchId = navigator.geolocation.watchPosition(
         (position) => {
           const lng = position.coords.longitude;
           const lat = position.coords.latitude;
-          // 位置情報が変化した場合の処理をここに書く
-          alert(lng + " : " + lat);
-          console.log("userのlocationをwatchしています");
+          // 
+          console.log("user current location is being watched");
           dispatch(setLocation({ lng: lng, lat: lat }));
         },
         (error) => {
@@ -69,7 +67,7 @@ const Map = (props) => {
         }
       );
     }
-  }, []);
+  }, [locationState.lat,locationState.lng]);
 
   return (
     <>
@@ -99,7 +97,7 @@ const Map = (props) => {
       ):
         (
           <div className='map'> 
-                  <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
+            <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
