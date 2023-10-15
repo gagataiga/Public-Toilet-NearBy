@@ -12,7 +12,6 @@ function Home() {
   const userState = useAppSelector(state => state.user);
   
   const handleAuthStateChange = async (user: any) => { 
-    console.log(user && (userState.fb_uid !== user.uid));
     if (user && (userState.fb_uid !== user.uid)) { 
       try {   
         const { user_id, username, email } = await getUserInfo(user.uid);
