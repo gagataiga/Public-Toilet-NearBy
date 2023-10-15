@@ -6,11 +6,16 @@ import userLocationBtn from "../img/userLocationBtn.png"
 
 const BackToLocationBtn = () => {
   const locationState = useAppSelector((state) => state.location);
+  const map = useMap();
+
+  const handleBackToLocation = () => { 
+    map.flyTo([locationState.lat, locationState.lng], map.getZoom());
+  }
 
   return (
     <div>
       <button className='user-location-btn'>
-        <img  id="user-location-img" src={userLocationBtn} alt="userlocationBtn-img" />
+        <img  id="user-location-img" src={userLocationBtn} alt="userlocationBtn-img" onClick={handleBackToLocation}/>
       </button>
     </div>
   )
