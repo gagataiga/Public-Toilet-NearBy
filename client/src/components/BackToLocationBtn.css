@@ -1,0 +1,20 @@
+.user-location-btn{
+  position: absolute;
+  top: 10%;
+  left: 11px;
+  z-index: 900;
+  background-color: rgb(255, 255, 255);
+  border: 1px solid black;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.user-location-btn:hover{
+  background-color: rgb(209, 209, 209);
+}
+
+#user-location-img{
+  width: 19px;
+  padding-top: 5px;
+  height: 20px;
+}
