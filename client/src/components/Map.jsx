@@ -111,19 +111,20 @@ useEffect(() => {
         <div className='map_container skeleton-loader'></div>
       ):
         (
-          <div className='map'> 
-                  <FilterBox posts={userPosts} setSelectedPosts={setfilteredPosts} />
-          <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
-           <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-              <LocationMaker />
-              {/* user posts marker should be here */}
-              <PostMaker posts={filteredPosts} />
-            </MapContainer>
-           {userState.isLoggedIn && (<PostBtn/>)}
-        </div>
+          <>
+            <FilterBox posts={userPosts} setSelectedPosts={setfilteredPosts} />
+            <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            <LocationMaker />
+            {/* user posts marker should be here */}
+            <PostMaker posts={filteredPosts} />
+          </MapContainer>
+         {userState.isLoggedIn && (<PostBtn/>)}
+                </>
+
         )
       }
     </>

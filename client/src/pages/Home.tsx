@@ -36,11 +36,9 @@ function Home() {
   
 
   return (
-    <div>
-      <main>
+      <main className="main-content">
         <Map isPost={false}/>
       </main>
-    </div>
   )
 }
 
