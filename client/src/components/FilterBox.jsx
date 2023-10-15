@@ -4,9 +4,8 @@ import "./FilterBox.css";
 import { facilities } from '../common/data/facilitiesTags';
 
 const FilterBox = (props) => {
-  const { posts, setSelectedPosts } = props;
+  const {posts, setSelectedPosts } = props;
   const [open, setOpen] = useState(false);
-  const [filteredPosts, setfilteredPosts] = useState([]);
   const [selectedTags, setTags] = useState([]);
 
   const handleOpen = () => {
@@ -14,22 +13,24 @@ const FilterBox = (props) => {
   };
 
   const addFilteredPosts = () => { 
+    // there is no selected tags
     if (selectedTags.length === 0) {
+      setSelectedPosts(posts);
       return;
     }
-
-    console.log(posts);
-  
+    
+    const newPosts = posts.filter(post => {
+      return selectedTags.every(num => post.facilities.includes(num));
+    });
+    
+    setSelectedPosts(newPosts);
   }
 
   const handleClose = () => {
-    // when user close tabs then filter 
-    // 
+    // make new filtered posts
     addFilteredPosts();
     setOpen(false);
   };
-
-  console.log(selectedTags);
 
   const addFilteredFacilites = (tagNum) => {
     if (selectedTags.includes(tagNum)) {
@@ -48,12 +49,15 @@ const FilterBox = (props) => {
           <h4>What kind of toilet are you looiking for? Please choose from the following </h4>
           <div className='filter-tags_container'>
           {facilities.map((tag, index) => { 
-            return <div className='filter-tag' key={index} style={ {backgroundColor: selectedTags.includes(index) ? "#E8FFCE": ""} }>
+            return (<div className='filter-tag' key={index} style={
+              { backgroundColor: selectedTags.includes(index) ? "#E8FFCE" : "" }
+            }>
               <p>{tag}</p>
                 <button type='button' className='filter_btn' onClick={()=>addFilteredFacilites(index)}>
                 <img src={"../"+tag+".png"} alt={tag} />
               </button>
             </div>
+            )
           })}
           </div>
         </Box>

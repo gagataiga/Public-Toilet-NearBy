@@ -20,12 +20,12 @@ const Map = (props) => {
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
   const [userPosts, setUserPosts] = useState([]);
-  const [filterdPosts, setFilterdPosts] = useState([]);
+  const [filteredPosts, setfilteredPosts] = useState([]);
 
   const fetchAllPosts = async () => { 
     const response = await getAllPosts();
     setUserPosts(response);
-    setFilterdPosts(response)
+    setfilteredPosts(response)
   }
   
   useEffect(() => {
@@ -72,7 +72,6 @@ useEffect(() => {
           const lat = position.coords.latitude;
           console.log("user current location is being watched");
           dispatch(setLocation({ lng: lng, lat: lat }));
-          console.log("location state", locationState);
         },
       (error) => {
         console.error("Error getting user location: ", error);
@@ -95,7 +94,6 @@ useEffect(() => {
             <div className='post-map_container skeleton-loader'></div>
           ) : (
               <div className='post-map'>
-              {console.log("this is post location",locationState.lng, locationState.lat)}
                 <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15}>
               <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -114,7 +112,7 @@ useEffect(() => {
       ):
         (
           <div className='map'> 
-                  <FilterBox posts={userPosts} setSelectedPosts={setFilterdPosts} />
+                  <FilterBox posts={userPosts} setSelectedPosts={setfilteredPosts} />
           <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -122,7 +120,7 @@ useEffect(() => {
             />
               <LocationMaker />
               {/* user posts marker should be here */}
-              <PostMaker posts={filterdPosts} />
+              <PostMaker posts={filteredPosts} />
             </MapContainer>
            {userState.isLoggedIn && (<PostBtn/>)}
         </div>
