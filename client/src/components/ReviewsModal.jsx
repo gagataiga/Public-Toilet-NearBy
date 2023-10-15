@@ -64,7 +64,13 @@ const ReviewsModal = (props) => {
         <Box className='review-modal-box'>
           <h4>This Toilet All reviews and ratings</h4>
           <div className='reviews_container'>
-            {reviews.map((review, index) => {
+            {reviews.length < 1 ? (
+              <>
+              There is no reviews
+              </> 
+            ) : (
+                <>
+              {reviews.map((review, index) => {
               const date = dateFomatChange(review.created_at);
               return (
                 <div key={index} className='review_container'>
@@ -72,7 +78,7 @@ const ReviewsModal = (props) => {
                   Date: {date}
                   </div>
                   <div className='review-content'>
-                   Name: {review.username}
+                  Name: {review.username}
                   </div>
                   <div className='review-content'>
                   <Rating name="size-small" defaultValue={review.rating} size="small" readOnly/>
@@ -84,6 +90,8 @@ const ReviewsModal = (props) => {
               </div>
               )
             })}
+              </>
+            )}
           </div>
           <Button>Let's review it</Button>
         </Box>

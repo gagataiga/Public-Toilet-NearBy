@@ -8,10 +8,10 @@ import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { useNavigate } from 'react-router-dom';
 
 function AuthForm(){
-  const [email, setEmail] = useState<string>("hoge@gmail.com");
-  const [password, setPassword] = useState<string>("hogehoge");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [isSignUp, setIsSignUp] = useState<boolean>(false);
-  const [userName, setUserName] = useState<string>("hoge");
+  const [userName, setUserName] = useState<string>("");
 
   const dispatch = useAppDispatch();
   const userState = useAppSelector((state) => state);
