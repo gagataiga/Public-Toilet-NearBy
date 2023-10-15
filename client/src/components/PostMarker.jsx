@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import { getAllPosts } from '../api/postService';
 import { Marker, Polyline, Popup } from "react-leaflet";
 import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
@@ -11,6 +10,7 @@ import { useAppDispatch } from '../redux/hooks';
 
 const PostMaker = (props) => {
   // props
+  console.log(props.posts);
   const { posts } = props;
   const [routes, setRoutes] = useState([]);
   const [duration, setDuration] = useState(0);

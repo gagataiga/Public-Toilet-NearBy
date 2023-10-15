@@ -21,7 +21,7 @@ function Post() {
   console.log("user current location",locationState);
   const [image, setImage] = useState<File | null>(null);
   const [tags, setTags] = useState<number[]>([]);
-  const [ratingValue, setRating] = useState<number>(3);
+  const [ratingValue, setRating] = useState<number>(0);
   const [toiletFee, setToiletFee] = useState<string>("Free");
   const [comment, setComment] = useState("");
 
@@ -80,7 +80,7 @@ function Post() {
         <Cost toiletFee={toiletFee} setToiletFee={setToiletFee} />
         <Tags tags={tags} setTags={setTags}/>
         <Comment comment={comment} setComment={setComment} />
-        <Button variant="contained"
+        <Button className="submit_btn"variant="contained"
           type="submit"
           onClick={handlePost}>Submit
         </Button>

@@ -1,5 +1,8 @@
 import React, { useState } from 'react'
 import { PostPictureProps } from './types';
+import "./PostPicture.css";
+import { Button } from '@mui/material';
+
 
 const PostPicture = ({image,setImage}:PostPictureProps) => {
 
@@ -18,16 +21,18 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
   };
 
   return (
-    <div className='post-img_container'>
-      <fieldset>
+      <fieldset className='post-img_container'>
       <legend>Toilet Image post</legend>
-      PostPicture
-      <input type="file" name="image" id="image-upload" onChange={handleImageSelect} accept="image/*"/>
-      <div className="img-preview">
-        {imageURL ? (<img src={imageURL} alt="Selected Image" />):(<div>ここにimageが表示されるよ</div>)}
-        </div>
-      </fieldset>
-    </div>
+      <Button
+      component="label"
+      >
+      Image Upload
+      <input type="file" name="image" id="image-upload" onChange={handleImageSelect} accept="image/*" hidden/>
+      </Button>
+      <div className="img-preview_container">
+        {imageURL ? (<img src={imageURL} alt="Selected Image" className='pre-img'/>):("")}
+      </div>
+    </fieldset>
   )
 }
 
