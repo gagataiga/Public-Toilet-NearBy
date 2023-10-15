@@ -1,10 +1,9 @@
 import "./UserPost.css";
 import React from 'react'
 import { Rating, Stack, Typography } from "@mui/material";
-import { facilities as tags} from "../common/data/Facilities";
+import { facilities as tags} from "../common/data/facilitiesTags";
 
 const UserPost = (props) => {
-  console.log(props.post);
   const { comment, cost, facilities, image_url, post_id, rating, user_id } = props.post  
   return (
     <div className="user-toilet-post_container">

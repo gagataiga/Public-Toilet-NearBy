@@ -9,23 +9,16 @@ import UserPost from './UserPost';
 import "./PostMarker.css";
 import { useAppDispatch } from '../redux/hooks';
 
-const PostMaker = () => {
+const PostMaker = (props) => {
   // props
+  const { posts } = props;
   const [routes, setRoutes] = useState([]);
   const [duration, setDuration] = useState(0);
   const [distance, setDistance] = useState(0);
   const [steps, setSteps] = useState([]);
-  const [posts, setPosts] = useState([]);
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
   const [post, setPostSelected] = useState([]);
-
-  const fetchAllPosts = async () => { 
-    const response = await getAllPosts();
-    setPosts(response);
-  }
-  
-  console.log(posts);
 
   const handleNavigateClick = async (lat, lng, post) => { 
     setPostSelected(post);
@@ -51,9 +44,6 @@ const PostMaker = () => {
     setDestination([lng, lat]);
   }
 
-  useEffect(() => {
-    fetchAllPosts();
-  }, []);
 
   return (
     <div>

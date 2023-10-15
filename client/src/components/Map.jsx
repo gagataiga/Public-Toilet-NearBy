@@ -6,9 +6,9 @@ import { setLocation } from '../redux/locationSlice';
 import { Location } from '../common/types';
 import "./Map.css"
 import PostBtn from './PostBtn';
-// import { User } from '../redux/types';
 import PostMaker from './PostMarker';
-// import { MapProps } from './types';
+import { getAllPosts } from '../api/postService';
+import FilterBox from './FilterBox';
 
 const Map = (props) => {
   
@@ -19,8 +19,20 @@ const Map = (props) => {
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
-  // const [center, setCenter] = useState<>([0,0]);
-  console.log(userState);
+  const [userPosts, setUserPosts] = useState([]);
+  const [filteredPosts, setfilteredPosts] = useState([]);
+
+  const fetchAllPosts = async () => { 
+    const response = await getAllPosts();
+    setUserPosts(response);
+    setfilteredPosts(response)
+  }
+  
+  useEffect(() => {
+    // userposts
+    fetchAllPosts();
+  },[]);
+
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
       if ("geolocation" in navigator) {
@@ -60,7 +72,6 @@ useEffect(() => {
           const lat = position.coords.latitude;
           console.log("user current location is being watched");
           dispatch(setLocation({ lng: lng, lat: lat }));
-          console.log("location state", locationState);
         },
       (error) => {
         console.error("Error getting user location: ", error);
@@ -69,7 +80,7 @@ useEffect(() => {
   }
     // unwatch
     return () => {
-        navigator.geolocation.clearWatch(watchId);
+      navigator.geolocation.clearWatch(watchId);
     };
   }
   }, []);
@@ -83,7 +94,6 @@ useEffect(() => {
             <div className='post-map_container skeleton-loader'></div>
           ) : (
               <div className='post-map'>
-              {console.log("this is post location",locationState.lng, locationState.lat)}
                 <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15}>
               <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -101,18 +111,20 @@ useEffect(() => {
         <div className='map_container skeleton-loader'></div>
       ):
         (
-          <div className='map'> 
+          <>
+            <FilterBox posts={userPosts} setSelectedPosts={setfilteredPosts} />
             <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
-           <TileLayer
-            attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-              <LocationMaker />
-              {/* user posts marker should be here */}
-              <PostMaker />
-              </MapContainer>
-           {userState.isLoggedIn && (<PostBtn/>)}
-        </div>
+              <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+            <LocationMaker />
+            {/* user posts marker should be here */}
+            <PostMaker posts={filteredPosts} />
+          </MapContainer>
+         {userState.isLoggedIn && (<PostBtn/>)}
+                </>
+
         )
       }
     </>

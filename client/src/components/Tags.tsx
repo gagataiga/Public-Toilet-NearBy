@@ -1,7 +1,7 @@
 import React from 'react'
 import Tag from './Tag'
 import { TagsProps } from './types'
-import { facilities } from '../common/data/Facilities'
+import { facilities } from '../common/data/facilitiesTags'
 
 const Tags = ({ tags, setTags }:TagsProps) => {
 

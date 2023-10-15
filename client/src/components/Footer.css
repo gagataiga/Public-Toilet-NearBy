@@ -2,6 +2,7 @@
   position: fixed;
   left: 0;
   bottom: 0;
+  height: 50px;
   width: 100%;
   background-color: #E8FFCE;
   color: rgba(0, 0, 0, 0.629);
