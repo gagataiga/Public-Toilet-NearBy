@@ -5,6 +5,7 @@ import { auth } from '../firebase.conf';
 import { onAuthStateChanged } from "firebase/auth";
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import Map from '../components/Map';
+import "./Home.css";
 
 function Home() {
   const dispatch = useAppDispatch();
@@ -37,7 +38,6 @@ function Home() {
   return (
     <div>
       <main>
-        <div className='search'>search box</div>
         <Map isPost={false}/>
       </main>
     </div>

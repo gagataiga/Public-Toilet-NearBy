@@ -6,9 +6,9 @@ import { setLocation } from '../redux/locationSlice';
 import { Location } from '../common/types';
 import "./Map.css"
 import PostBtn from './PostBtn';
-// import { User } from '../redux/types';
 import PostMaker from './PostMarker';
-// import { MapProps } from './types';
+import { getAllPosts } from '../api/postService';
+import FilterBox from './FilterBox';
 
 const Map = (props) => {
   
@@ -19,8 +19,20 @@ const Map = (props) => {
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const [defaultUserLocation, setDefaultUserLocation] = useState({lat:undefined,lng:undefined});
-  // const [center, setCenter] = useState<>([0,0]);
-  console.log(userState);
+  const [userPosts, setUserPosts] = useState([]);
+  const [filterdPosts, setFilterdPosts] = useState([]);
+
+  const fetchAllPosts = async () => { 
+    const response = await getAllPosts();
+    setUserPosts(response);
+    setFilterdPosts(response)
+  }
+  
+  useEffect(() => {
+    // userposts
+    fetchAllPosts();
+  },[]);
+
   useEffect(() => {
     if ((!locationState.lat && !locationState.lng) && (!defaultUserLocation.lat && !defaultUserLocation.lng)) {
       if ("geolocation" in navigator) {
@@ -69,7 +81,7 @@ useEffect(() => {
   }
     // unwatch
     return () => {
-        navigator.geolocation.clearWatch(watchId);
+      navigator.geolocation.clearWatch(watchId);
     };
   }
   }, []);
@@ -102,15 +114,16 @@ useEffect(() => {
       ):
         (
           <div className='map'> 
-            <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
+                  <FilterBox posts={userPosts} setSelectedPosts={setFilterdPosts} />
+          <MapContainer className='map_container' center={{ lng: defaultUserLocation.lng, lat: defaultUserLocation.lat} || [51.505, -0.09]} zoom={15}>
            <TileLayer
             attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
               <LocationMaker />
               {/* user posts marker should be here */}
-              <PostMaker />
-              </MapContainer>
+              <PostMaker posts={filterdPosts} />
+            </MapContainer>
            {userState.isLoggedIn && (<PostBtn/>)}
         </div>
         )

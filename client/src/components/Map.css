@@ -8,11 +8,11 @@
 }
 
 .map_container {
-  height: 64vh;
-  width: 95%;
+  height: 65vh;
+  width: 99%;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
-  box-shadow: 3px 3px 1px #bebebe ;
+  box-shadow: 1px 1px 1px #bebebe ;
   margin: auto;
 }
 
