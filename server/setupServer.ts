@@ -3,6 +3,8 @@ const express = require("express");
 const usersRouter = require("./router/users-router");
 const locationsRouter = require("./router/locations-router");
 const postsRouter = require("./router/posts-router");
+const reviewsRouter = require("./router/reviews-router");
+
 const cors = require("cors");
 const path = require("path");
 
@@ -23,5 +25,6 @@ export const setUpServer = () => {
   app.use("/users", usersRouter);
   app.use("/locations", locationsRouter);
   app.use("/posts", postsRouter);
+  app.use("/reviews", reviewsRouter);
   return app;
 }
