@@ -31,3 +31,8 @@ export const formatDistance = (distance: number) => {
     return `${distance} m` ;
   }
 }
+
+export const dateFomatChange = (date: string) => { 
+  const formattedDate = date.split('T')[0];
+  return formattedDate;
+}

@@ -2,15 +2,14 @@ import React, { useEffect, useState } from 'react'
 import { Marker, Polyline, Popup } from "react-leaflet";
 import { getNavigation } from '../api/locationService';
 import { useAppSelector } from '../redux/hooks';
-import { Button } from '@mui/material';
+import { Button, Mordal} from '@mui/material';
 import Navigator from './Navigator';
 import UserPost from './UserPost';
 import "./PostMarker.css";
-import { useAppDispatch } from '../redux/hooks';
+import ReviewsModal from './ReviewsModal';
 
 const PostMaker = (props) => {
   // props
-  console.log(props.posts);
   const { posts } = props;
   const [routes, setRoutes] = useState([]);
   const [duration, setDuration] = useState(0);
@@ -19,6 +18,12 @@ const PostMaker = (props) => {
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
   const [post, setPostSelected] = useState([]);
+
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
 
   const handleNavigateClick = async (lat, lng, post) => { 
     setPostSelected(post);
@@ -44,7 +49,6 @@ const PostMaker = (props) => {
     setDestination([lng, lat]);
   }
 
-
   return (
     <div>
       {routes.length > 0 ? (<>
@@ -59,17 +63,19 @@ const PostMaker = (props) => {
       <>
             {posts.map((post, index) => {
               return (
-                <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
+                  <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
                   <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
                     <UserPost post={post} />
                     <div>
-                    <button className='review-btn'>Would you like to see Reviews?</button>
+                    <button className='review-btn' onClick={handleOpen}>Would you like to see Reviews?</button>
                     </div>
                     <div className='navigate-btn_container'>
                     <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
                     </div>
+                   {/* this is for reviews */}
+                    {open && <ReviewsModal open={open} setOpen={setOpen} postId={post.post_id} /> }
                   </Popup>
-                </Marker>
+                  </Marker>
               );
             })}
       </>
