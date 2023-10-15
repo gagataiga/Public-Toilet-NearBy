@@ -1,7 +1,7 @@
 import React from 'react'
 import { Rating, Stack,Typography } from '@mui/material'
 import { RatingProps } from './types'
-
+import "./Ratings.css";
 const
   Ratings = ({ ratingValue, setRating }: RatingProps) => {
   
@@ -13,9 +13,10 @@ const
 
   return (
     <div>
-      <fieldset>
+      <fieldset className='rating_conrainer'>
       <legend>Rating</legend>
-        <Typography component="legend">Controlled</Typography>
+        <Typography component="legend">Choose your rating</Typography>
+        
           <Stack spacing={1}>
             <Rating name="rating" value={ratingValue} precision={1} onChange={handleRatingChange}/>
           </Stack>

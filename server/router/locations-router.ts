@@ -4,8 +4,8 @@ const express = require("express");
 const router = express.Router();
 const locationModel = require("../model/locations-model");
 const axios = require('axios');
-const path = require("path");
-
+const path = require("path"); 
+  
 router.post("/",async (req:Request, res:Response) => {
   try {
     const location = req.body;

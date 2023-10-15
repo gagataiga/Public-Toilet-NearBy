@@ -1,6 +1,6 @@
 import "./UserPost.css";
 import React from 'react'
-import { Rating, Stack, Typography } from "@mui/material";
+import { Rating, Stack } from "@mui/material";
 import { facilities as tags} from "../common/data/facilitiesTags";
 
 const UserPost = (props) => {
@@ -12,7 +12,7 @@ const UserPost = (props) => {
       <div className="rating_container">
       <div className="rating">
         <Stack spacing={1}>
-            <Rating name="rating" value={rating} precision={1} readOnly className="rating"/>
+            <Rating name="rating" value={Number(rating)} precision={1} readOnly className="rating"/>
         </Stack>
         </div>
       </div>

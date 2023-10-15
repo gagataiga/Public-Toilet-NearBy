@@ -27,10 +27,29 @@ module.exports = {
   async getAllPosts() {
     try {
       const response = await postsKnex(POSTS_TABLE)
-        .select("post_id", "comment", "user_id", "cost",
-          "facilities", "image_url", "rating",
-          "locations.longitude", "locations.latitude")
-        .join("locations", { "posts.location_id": "locations.location_id" });
+      .select(
+        'posts.post_id', 
+        'posts.comment', 
+        'posts.user_id', 
+        'posts.cost', 
+        'posts.facilities', 
+        'posts.image_url', 
+        'locations.longitude', 
+        'locations.latitude'
+      )
+      .leftJoin('locations', 'posts.location_id', 'locations.location_id')
+      .leftJoin('reviews', 'posts.post_id', 'reviews.post_id')
+      .groupBy(
+        'posts.post_id', 
+        'posts.comment', 
+        'posts.user_id', 
+        'posts.cost', 
+        'posts.facilities', 
+        'posts.image_url', 
+        'locations.longitude', 
+        'locations.latitude'
+      )
+      .select(postsKnex.raw('COALESCE((SUM(CAST(posts.rating AS INTEGER)) + COALESCE(SUM(CAST(reviews.rating AS INTEGER)), 0)) / (COUNT(posts.rating) + COUNT(reviews.rating)), 0) AS rating'));
       return response;
     } catch (error) {
       throw error;

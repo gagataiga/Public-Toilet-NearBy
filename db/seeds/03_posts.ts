@@ -7,7 +7,6 @@ export async function seed(knex: Knex): Promise<void> {
     // Inserts seed entries
     await knex("posts").insert([
         {
-        post_id: 1,
         comment: 'This is nice',
         created_at: new Date(Date.now()).toISOString(),
         updated_at: new Date(Date.now()).toISOString(),
@@ -19,7 +18,7 @@ export async function seed(knex: Knex): Promise<void> {
         rating: 5
         },
         {
-            post_id: 2,
+           
             comment: 'This is nice',
             created_at: new Date(Date.now()).toISOString(),
             updated_at: new Date(Date.now()).toISOString(),
@@ -31,7 +30,6 @@ export async function seed(knex: Knex): Promise<void> {
             rating: 5
         },
         {
-            post_id: 3,
             comment: 'This is nice',
             created_at: new Date(Date.now()).toISOString(),
             updated_at: new Date(Date.now()).toISOString(),
@@ -43,7 +41,6 @@ export async function seed(knex: Knex): Promise<void> {
             rating: 4
         },
         {
-            post_id: 4,
             comment: 'This is nice',
             created_at: new Date(Date.now()).toISOString(),
             updated_at: new Date(Date.now()).toISOString(),

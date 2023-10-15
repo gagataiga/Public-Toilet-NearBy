@@ -8,6 +8,7 @@
   margin: auto;
   margin-top: 30px;
   border-radius: 5px;
+  text-align: center;
 }
 
 .post_item_message{
@@ -24,3 +25,7 @@
   box-shadow: 1px 1px 10px rgb(139, 139, 139);
 }
 
+.submit_btn{
+  margin-bottom: 20px;
+  margin-top: 20px;
+}

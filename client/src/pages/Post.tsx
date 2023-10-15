@@ -13,6 +13,7 @@ import Cost from '../components/Cost';
 import { imageUploader } from '../api/postService';
 import { validateInputs } from "../utils/util";
 import { locationUploader, postUploader } from '../api/postService';
+import { useNavigate } from 'react-router-dom';
 
 function Post() {
   const locationState: Location = useAppSelector((state) => state.location);
@@ -21,9 +22,10 @@ function Post() {
   console.log("user current location",locationState);
   const [image, setImage] = useState<File | null>(null);
   const [tags, setTags] = useState<number[]>([]);
-  const [ratingValue, setRating] = useState<number>(3);
+  const [ratingValue, setRating] = useState<number>(0);
   const [toiletFee, setToiletFee] = useState<string>("Free");
   const [comment, setComment] = useState("");
+  const navigate = useNavigate();
 
   const handlePost = async(e:any) => { 
     e.preventDefault();
@@ -60,6 +62,9 @@ function Post() {
             rating: ratingValue
           }
         const response = await postUploader(userPost);
+
+        navigate("/");
+        alert("Your post was a success.")
       } catch(error) { 
         console.error(error);
       }
@@ -80,7 +85,7 @@ function Post() {
         <Cost toiletFee={toiletFee} setToiletFee={setToiletFee} />
         <Tags tags={tags} setTags={setTags}/>
         <Comment comment={comment} setComment={setComment} />
-        <Button variant="contained"
+        <Button className="submit_btn"variant="contained"
           type="submit"
           onClick={handlePost}>Submit
         </Button>
