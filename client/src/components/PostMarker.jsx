@@ -7,6 +7,7 @@ import Navigator from './Navigator';
 import UserPost from './UserPost';
 import "./PostMarker.css";
 import ReviewsModal from './ReviewsModal';
+import L from "leaflet";
 
 const PostMaker = (props) => {
   // props
@@ -49,6 +50,11 @@ const PostMaker = (props) => {
     setDestination([lng, lat]);
   }
 
+  const postsMarkerIcon = new L.Icon({
+    iconUrl: require("../img/postMarker.png"),
+    iconSize:[35,40],
+  });
+
   return (
     <div>
       {routes.length > 0 ? (<>
@@ -63,7 +69,7 @@ const PostMaker = (props) => {
       <>
             {posts.map((post, index) => {
               return (
-                  <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} >
+                <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} icon={postsMarkerIcon} >
                   <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
                     <UserPost post={post} />
                     <div>

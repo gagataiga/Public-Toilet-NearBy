@@ -12,7 +12,6 @@ const ReviewsModal = (props) => {
   
   const fetchReviews = async () => { 
     const result = await getUsersReview(postId);
-    console.log("this is reviews", result);
     setReviews(result);
   } 
   const fakedata = [

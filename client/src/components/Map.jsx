@@ -1,20 +1,19 @@
 import React, { useEffect, useState,  } from 'react'
-import { MapContainer, TileLayer, MapContainerProps} from "react-leaflet";
+import { MapContainer, TileLayer, useMapEvents} from "react-leaflet";
 import LocationMaker from './LocationMarker';
 import { useAppSelector, useAppDispatch } from '../redux/hooks';
 import { setLocation } from '../redux/locationSlice';
-import { Location } from '../common/types';
 import "./Map.css"
 import PostBtn from './PostBtn';
 import PostMaker from './PostMarker';
 import { getAllPosts } from '../api/postService';
 import FilterBox from './FilterBox';
+import BackToLocationBtn from './BackToLocationBtn';
 
 const Map = (props) => {
   
   const { isPost } = props;
-  // const locationState: Location = useAppSelector((state) => state.location);
-  // const userState: User = useAppSelector((state) => state.user);
+  
   const locationState = useAppSelector((state) => state.location);
   const userState = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
@@ -27,7 +26,7 @@ const Map = (props) => {
     setUserPosts(response);
     setfilteredPosts(response)
   }
-  
+
   useEffect(() => {
     // userposts
     fetchAllPosts();
@@ -94,13 +93,14 @@ useEffect(() => {
             <div className='post-map_container skeleton-loader'></div>
           ) : (
               <div className='post-map'>
-                <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15}>
+                <MapContainer className='post-map_container' center={(locationState.lng && locationState.lat) ? { lng: locationState.lng, lat: locationState.lat } : [51.505, -0.09]} zoom={15} >
               <TileLayer
               attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               />
                 <LocationMaker />
-            </MapContainer>
+                <BackToLocationBtn/>
+              </MapContainer>
           </div>
           )}
       </>
@@ -121,10 +121,10 @@ useEffect(() => {
             <LocationMaker />
             {/* user posts marker should be here */}
             <PostMaker posts={filteredPosts} />
-          </MapContainer>
+            <BackToLocationBtn/>
+            </MapContainer>
          {userState.isLoggedIn && (<PostBtn/>)}
                 </>
-
         )
       }
     </>
