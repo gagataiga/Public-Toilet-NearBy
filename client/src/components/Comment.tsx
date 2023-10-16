@@ -5,7 +5,6 @@ import { CommentProps } from './types'
 const Comment = ({ comment, setComment }: CommentProps) => {
   
   const handleComment = (event: React.ChangeEvent<HTMLInputElement>) => {
-    // コメントを送信するための処理をここに追加（例：APIリクエストを送信する、コメントを保存するなど）
     setComment(event.target.value)
   };
 

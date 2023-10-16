@@ -18,6 +18,7 @@ const PostMaker = (props) => {
   const [steps, setSteps] = useState([]);
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
+  const userState = useAppSelector((state) => state.user);
   const [post, setPostSelected] = useState([]);
 
   const [open, setOpen] = useState(false);
@@ -73,7 +74,9 @@ const PostMaker = (props) => {
                   <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
                     <UserPost post={post} />
                     <div>
+                      {userState.fb_uid &&   
                     <button className='review-btn' onClick={handleOpen}>Would you like to see Reviews?</button>
+                      }
                     </div>
                     <div className='navigate-btn_container'>
                     <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
