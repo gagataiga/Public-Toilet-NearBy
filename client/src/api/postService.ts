@@ -63,3 +63,12 @@ export const getAllPosts = async () => {
     console.error(error);
   }
 }
+
+export const getUserPostById = async (userId: number) => { 
+  try {
+    const response = await axios.get(`${apiUrl}posts/${userId}`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
