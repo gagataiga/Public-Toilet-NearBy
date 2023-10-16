@@ -6,7 +6,6 @@ import { Button, Mordal} from '@mui/material';
 import Navigator from './Navigator';
 import UserPost from './UserPost';
 import "./PostMarker.css";
-import ReviewsModal from './ReviewsModal';
 import L from "leaflet";
 
 const PostMaker = (props) => {
@@ -18,13 +17,9 @@ const PostMaker = (props) => {
   const [steps, setSteps] = useState([]);
   const [destination, setDestination] = useState([]);
   const locationState = useAppSelector((state) => state.location);
+  const userState = useAppSelector((state) => state.user);
   const [post, setPostSelected] = useState([]);
 
-  const [open, setOpen] = useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleNavigateClick = async (lat, lng, post) => { 
     setPostSelected(post);
@@ -69,19 +64,16 @@ const PostMaker = (props) => {
       <>
             {posts.map((post, index) => {
               return (
-                <Marker key={index} position={{ lng: post.longitude, lat: post.latitude }} icon={postsMarkerIcon} >
-                  <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
-                    <UserPost post={post} />
-                    <div>
-                    <button className='review-btn' onClick={handleOpen}>Would you like to see Reviews?</button>
-                    </div>
-                    <div className='navigate-btn_container'>
-                    <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
-                    </div>
-                   {/* this is for reviews */}
-                    {open && <ReviewsModal open={open} setOpen={setOpen} postId={post.post_id} /> }
-                  </Popup>
-                  </Marker>
+                <div key={index}>
+                  <Marker position={{ lng: post.longitude, lat: post.latitude }} icon={postsMarkerIcon} >
+                    <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
+                      <UserPost post={post} />
+                      <div className='navigate-btn_container'>
+                      <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
+                      </div>
+                    </Popup>
+                    </Marker>
+                </div>
               );
             })}
       </>

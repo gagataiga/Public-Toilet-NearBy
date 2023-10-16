@@ -1,10 +1,17 @@
 import "./UserPost.css";
-import React from 'react'
+import React, { useState } from 'react'
 import { Rating, Stack } from "@mui/material";
 import { facilities as tags} from "../common/data/facilitiesTags";
+import ReviewsModal from "./ReviewsModal";
 
 const UserPost = (props) => {
-  const { comment, cost, facilities, image_url, post_id, rating, user_id } = props.post  
+  const { comment, cost, facilities, image_url, post_id, rating, user_id } = props.post;
+  const [open, setOpen] = useState(false);
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+
   return (
     <div className="user-toilet-post_container">
       <fieldset className="post_content">
@@ -52,6 +59,12 @@ const UserPost = (props) => {
         </textarea >
       </div>
       </fieldset>
+
+      <div>
+        <button className='review-btn' onClick={handleOpen}>Would you like to see Reviews?</button>
+         {/* this is for reviews */}
+         {open && <ReviewsModal open={open} setOpen={setOpen} postId={post_id} /> }
+      </div>
     </div>
   )
 }

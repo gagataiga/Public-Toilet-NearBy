@@ -9,3 +9,12 @@ export const getUsersReview = async (postId: number) => {
     console.error(error);
   }
 }
+
+export const postReview = async (review: { comment: string, user_id: number, rating: number, post_id: number }) => { 
+  try {
+    const response = await axios.post(`${apiUrl}reviews/`, review);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
