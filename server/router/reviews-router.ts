@@ -18,7 +18,8 @@ router.get("/:postId", async (req: Request, res: Response) => {
 router.post("/",async (req:Request, res:Response) => {
   try {
     const review = req.body;
-    console.log();
+    const result = await reviewsModel.insertReview(review);
+    res.status(200).send("Review inserting is successful")
   } catch (error) {
     console.log(error);
     res.status(400).send("bad request");
