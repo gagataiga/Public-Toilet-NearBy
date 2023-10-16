@@ -16,7 +16,7 @@ const ReviewsModal = (props) => {
   const userState = useAppSelector(state => state.user);
 
   const handleClose = () => { setOpen(false) }
-  
+
   const fetchReviews = async () => { 
     const result = await getUsersReview(postId);
     setReviews(result);
@@ -30,8 +30,11 @@ const ReviewsModal = (props) => {
     setComment(e.target.value)
   };
 
-  const handleRating = (e) => {
-    setRating(e.target.value)
+  const handleRating = (e, newValue) => {
+    if (newValue !== null) {
+      console.log(newValue);
+      setRating(newValue)
+    }
   };
 
   const handleReviewSubmit = async(e) => { 
@@ -42,7 +45,7 @@ const ReviewsModal = (props) => {
     }
 
     try {
-      const result = await postReview({ comment: comment, user_id: userState.uid, rating: rating, post_id: postId });
+      const result = await postReview({ comment: comment, user_id: userState.uid, rating: rating, post_id: postId});
       alert(result);
       handleClose();
     } catch (error) {
@@ -52,6 +55,7 @@ const ReviewsModal = (props) => {
 
   useEffect(() => {
     fetchReviews();
+    console.log("呼ばれだよ");
   }, []);
 
   return (
@@ -66,7 +70,7 @@ const ReviewsModal = (props) => {
                   <div className='review_container'>
                     <form action="">
                     <div className='review-content review-post'>
-                        <Rating name="size-medium" defaultValue={0} value={rating} size="medium" onChange={handleRating}/>
+                        <Rating name="size-medium" defaultValue={0} value={Number(rating)} size="medium" onChange={handleRating}/>
                     </div>
                     <div className='review-content review-post'>
                         <textarea name="review" id="review-post-msg" cols="30" rows="5" placeholder='Here you can review' style={{resize:"none"}} onChange={handleComment}>
@@ -110,7 +114,7 @@ const ReviewsModal = (props) => {
                 )}
             </div>)}
           </div>
-          <Button onClick={handloeToggleReviewPost}>{isReviewing ? "Back" : "Let's review it"}</Button>
+          {!userState.isLoggedIn ? (<Button onClick={handleClose}>Back</Button>) : (<Button onClick={handloeToggleReviewPost}>{isReviewing ? "Back" : "Let's review it"}</Button>)}
         </Box>
       </Modal>
     </div>
