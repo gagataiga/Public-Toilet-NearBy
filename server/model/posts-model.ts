@@ -54,5 +54,20 @@ module.exports = {
     } catch (error) {
       throw error;
     }
+  },
+  async getUserPostByUId(userId: number) {
+    try {
+      const response = await postsKnex(POSTS_TABLE).select(
+        'post_id',
+        'comment',
+        'cost',
+        'facilities',
+        'image_url',
+      ).where("user_id", userId);
+      return response;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
   }
 }

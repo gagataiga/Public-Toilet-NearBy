@@ -15,6 +15,19 @@ router.post("/", async (req: Request, res: Response) => {
   }
 });
 
+router.get("/:userId", async (req: Request, res: Response) => {
+  try {
+    const userId = req.params.userId;
+    const response = await postsModel.getUserPostByUId(userId);
+    console.log(response);
+    
+    res.status(200).send(userId);
+  } catch (error) {
+    res.status(400).send("bad request");
+    console.error(error);
+  }
+});
+
 router.get("/", async (req: Request, res: Response) => { 
   try {
     const response = await postsModel.getAllPosts();
