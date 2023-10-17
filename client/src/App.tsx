@@ -7,7 +7,8 @@ import Footer from './components/Footer';
 import { Route, Routes,Navigate } from 'react-router-dom';
 import Auth from './pages/Auth';
 import Post from './pages/Post';
-
+import Posts from './pages/Posts';
+  
 function App() {
 
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path='/home' element={<Home />} />
         <Route path='/auth' element={<Auth />} />
         <Route path='/post' element={<Post />} />
+        <Route path='/posts' element={<Posts />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     <Footer />

@@ -21,7 +21,7 @@ router.get("/:userId", async (req: Request, res: Response) => {
     const response = await postsModel.getUserPostByUId(userId);
     console.log(response);
     
-    res.status(200).send(userId);
+    res.status(200).send(response);
   } catch (error) {
     res.status(400).send("bad request");
     console.error(error);
