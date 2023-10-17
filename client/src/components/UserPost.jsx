@@ -5,15 +5,20 @@ import { facilities as tags} from "../common/data/facilitiesTags";
 import ReviewsModal from "./ReviewsModal";
 
 const UserPost = (props) => {
-  const { comment, cost, facilities, image_url, post_id, rating, user_id } = props.post;
+  const { comment, cost, facilities, image_url, post_id, rating, user_id, longitude, latitude } = props.post;
+  const isPostsPage  = props.isPostsPage;
+
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
     setOpen(true);
   };
 
+  const own = "own-toilet-post_container";
+  const somebodyPost = "user-toilet-post_container";
+
   return (
-    <div className="user-toilet-post_container">
+    <div className={isPostsPage ? own : somebodyPost}>
       <fieldset className="post_content">
         <legend className="title">Toilet Total Rating</legend>  
       <div className="rating_container">
@@ -63,7 +68,7 @@ const UserPost = (props) => {
       <div>
         <button className='review-btn' onClick={handleOpen}>Would you like to see Reviews?</button>
          {/* this is for reviews */}
-         {open && <ReviewsModal open={open} setOpen={setOpen} postId={post_id} /> }
+        {open && <ReviewsModal open={open} setOpen={setOpen} postId={post_id} isPostsPage={isPostsPage} /> }
       </div>
     </div>
   )

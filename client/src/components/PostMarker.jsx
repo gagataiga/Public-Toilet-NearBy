@@ -67,7 +67,7 @@ const PostMaker = (props) => {
                 <div key={index}>
                   <Marker position={{ lng: post.longitude, lat: post.latitude }} icon={postsMarkerIcon} >
                     <Popup maxWidth={5000} maxHeight="auto" className='custom-popup-content'>
-                      <UserPost post={post} />
+                      <UserPost post={post} isPostsPage={false} />
                       <div className='navigate-btn_container'>
                       <Button variant="contained" onClick={() => handleNavigateClick(post.latitude, post.longitude, post)}>Navigate</Button>
                       </div>

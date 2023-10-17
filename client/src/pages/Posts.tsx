@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../redux/hooks'
 import { getUserPostById } from '../api/postService'
 import UserPost from '../components/UserPost'
+import "./Posts.css";
 
 const Posts = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -17,14 +18,23 @@ const Posts = () => {
       setUserPosts(response);
     }
   }
+
   useEffect(() => {
     fetchPosts();
   }, []);
-  
-
+   
   return (
-    <div>
-      {}
+    <div className='own-posts_container'>
+    <h2 className='post-title'>Your Posts</h2>
+    <div className='own-posts'>
+        {userPosts.map((post, index) => { 
+        return (
+          <div className='own-post' key={index}>
+            <UserPost post={post} isPostsPage={true} />
+          </div>
+        );
+      })}
+    </div>
     </div>
   )
 }
