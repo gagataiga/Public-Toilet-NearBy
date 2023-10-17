@@ -28,9 +28,7 @@ router.get("/:userId", async (req: Request, res: Response) => {
   }
 });
 
-router.get("/", async (req: Request, res: Response) => { 
-  console.log("呼ばれたよ");
-  
+router.get("/", async (req: Request, res: Response) => {   
   try {
     const response = await postsModel.getAllPosts();
     console.log(response);
