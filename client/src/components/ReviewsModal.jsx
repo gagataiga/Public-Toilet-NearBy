@@ -7,12 +7,12 @@ import { postReview } from '../api/reviewsService';
 import { useAppSelector } from '../redux/hooks';
 
 const ReviewsModal = (props) => {
-  const { open, setOpen, postId , isPostPage} = props;
+  const { open, setOpen, postId } = props;
   const [reviews, setReviews] = useState([]);
   const [isReviewing, setIsReviewing] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
-
+  const isPostsPage = props.isPostsPage;
   const userState = useAppSelector(state => state.user);
 
   const handleClose = () => { setOpen(false) }
@@ -113,7 +113,7 @@ const ReviewsModal = (props) => {
                 )}
             </div>)}
           </div>
-          {isPostPage ? (<></>) : (<> 
+          {isPostsPage ? (<></>) : (<> 
           {!userState.isLoggedIn ? (<Button onClick={handleClose}>Back</Button>) : (<Button onClick={handloeToggleReviewPost}>{isReviewing ? "Back" : "Let's review it"}</Button>)}
           </>)}
         </Box>

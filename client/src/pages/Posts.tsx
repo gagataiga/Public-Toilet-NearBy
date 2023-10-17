@@ -25,7 +25,7 @@ const Posts = () => {
    
   return (
     <div className='own-posts_container'>
-    <h2 className='post-title'>Your Posts</h2>
+    <h3 className='post-title'>Your Posts</h3>
     <div className='own-posts'>
         {userPosts.map((post, index) => { 
         return (
