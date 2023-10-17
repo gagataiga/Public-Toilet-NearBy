@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useAppSelector } from '../redux/hooks'
 import { getUserPostById } from '../api/postService'
+import UserPost from '../components/UserPost'
 
 const Posts = () => {
   const [userPosts, setUserPosts] = useState([]);
@@ -13,7 +14,6 @@ const Posts = () => {
     } else {
       const response = await getUserPostById(userState.uid);
       console.log(response);
-      
       setUserPosts(response);
     }
   }
@@ -23,7 +23,9 @@ const Posts = () => {
   
 
   return (
-    <div>Posts</div>
+    <div>
+      {}
+    </div>
   )
 }
 
