@@ -29,8 +29,11 @@ router.get("/:userId", async (req: Request, res: Response) => {
 });
 
 router.get("/", async (req: Request, res: Response) => { 
+  console.log("呼ばれたよ");
+  
   try {
     const response = await postsModel.getAllPosts();
+    console.log(response);
     res.status(200).send(response);
   } catch (error) {
     res.status(400).send("bad request");
