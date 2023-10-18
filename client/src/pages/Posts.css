@@ -1,0 +1,27 @@
+.own-posts_container {
+  margin: 10px;
+  margin-top: 30px;
+}
+
+.post-title{
+  text-align: center;
+}
+
+
+.own-posts{
+  overflow-y: auto; 
+  height: 450px;
+}
+
+.own-post{
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-bottom: 10px;
+  width: 250px;
+  border: 1px solid rgb(16, 16, 16);
+  border-radius: 10px;
+  box-shadow: 1px 1px 6px rgb(90, 90, 90);
+  padding: 30px;
+
+}

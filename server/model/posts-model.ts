@@ -63,7 +63,11 @@ module.exports = {
         'cost',
         'facilities',
         'image_url',
-      ).where("user_id", userId);
+        'locations.longitude',
+        'locations.latitude',
+      )
+      .join('locations', 'posts.location_id', '=', 'locations.location_id')
+      .where("user_id", userId);
       return response;
     } catch (error) {
       console.error(error);

@@ -12,7 +12,7 @@ const ReviewsModal = (props) => {
   const [isReviewing, setIsReviewing] = useState(false);
   const [comment, setComment] = useState("");
   const [rating, setRating] = useState(0);
-
+  const isPostsPage = props.isPostsPage;
   const userState = useAppSelector(state => state.user);
 
   const handleClose = () => { setOpen(false) }
@@ -55,7 +55,6 @@ const ReviewsModal = (props) => {
 
   useEffect(() => {
     fetchReviews();
-    console.log("呼ばれだよ");
   }, []);
 
   return (
@@ -114,7 +113,9 @@ const ReviewsModal = (props) => {
                 )}
             </div>)}
           </div>
+          {isPostsPage ? (<></>) : (<> 
           {!userState.isLoggedIn ? (<Button onClick={handleClose}>Back</Button>) : (<Button onClick={handloeToggleReviewPost}>{isReviewing ? "Back" : "Let's review it"}</Button>)}
+          </>)}
         </Box>
       </Modal>
     </div>

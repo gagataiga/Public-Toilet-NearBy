@@ -6,6 +6,13 @@
   width: 180px;
 }
 
+.own-toilet-post_container{
+  height: 100%;
+  width: auto;
+  text-align: center;
+  overflow-y: auto; 
+}
+
 .post_content{
    border: 2px solid rgb(175, 175, 175);
    margin-top: 10px;
