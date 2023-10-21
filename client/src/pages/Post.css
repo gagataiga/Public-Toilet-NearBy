@@ -1,14 +1,21 @@
 
+.post_container{
+  display: flex;
+  justify-content: center; 
+  align-items: center; 
+}
 .post {
-  height: 65vh;
   width: 90%;
   background-color: rgb(255, 255, 255);
-  box-shadow: 0px 2px 10px rgb(183, 183, 183);
-  overflow: scroll;
-  margin: auto;
-  margin-top: 30px;
+  box-shadow: 0px 2px 10px rgb(114, 112, 112);
   border-radius: 5px;
   text-align: center;
+  position: fixed;
+  top: 100px;
+  bottom: 70px;
+  width: 75%;
+  overflow-y: auto;
+  margin: auto;
 }
 
 .post_item_message{

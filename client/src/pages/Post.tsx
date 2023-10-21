@@ -71,6 +71,7 @@ function Post() {
   } 
 
   return (
+    <div className="post_container">
     <div className='post'>
       <form action="post" className='post_form'>
       <p className='post_item_message'>Thank you for your volunteerism</p>
@@ -89,6 +90,7 @@ function Post() {
           onClick={handlePost}>Submit
         </Button>
       </form>
+    </div>
     </div>
 
   )

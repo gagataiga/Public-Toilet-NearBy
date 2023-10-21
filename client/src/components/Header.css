@@ -3,9 +3,12 @@
   top:0;
   left: 0;
   height: 90px;
+  width: 100%;
+  position: fixed;
   display: flex;
   justify-content: space-between; 
   align-items: center; 
+  z-index: 1500;
 }
 
 .header__item_title{
