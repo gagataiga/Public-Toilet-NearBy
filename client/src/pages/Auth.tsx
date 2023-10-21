@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import AuthForm from '../components/AuthForm'
+import "./Auth.css";
 
 function Auth() {
 
   return (
-    <AuthForm/>
+    <div className='auth'>
+      <AuthForm/>
+    </div>
   )
 }
 

@@ -1,8 +1,9 @@
 .form__container{
   text-align: center;
   border: 1px solid black;
+  position: fixed;
+  top: 100px;
   width: 80%;
-  margin: auto;
   margin-top: 40px;
   border-radius: 10px;
   box-shadow: 3px 3px rgba(0, 0, 0, 0.763);
