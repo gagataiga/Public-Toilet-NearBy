@@ -65,6 +65,7 @@ module.exports = {
         'image_url',
         'locations.longitude',
         'locations.latitude',
+        'rating',
       )
       .join('locations', 'posts.location_id', '=', 'locations.location_id')
       .where("user_id", userId);
