@@ -69,7 +69,6 @@ useEffect(() => {
         (position) => {
           const lng = position.coords.longitude;
           const lat = position.coords.latitude;
-          console.log("user current location is being watched");
           dispatch(setLocation({ lng: lng, lat: lat }));
         },
       (error) => {
