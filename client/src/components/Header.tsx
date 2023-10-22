@@ -17,7 +17,7 @@ function Header() {
   return (
     <header className='header'>
       <div className='header__item_title'>
-          <Link to="/"><h2 className='heaer__item_link' onClick={closedNavBar}>Near-Me-Toilet</h2></Link>
+          <Link to="/"><h2 className='heaer__item_link' onClick={closedNavBar}>Public-Toilet-NearBy</h2></Link>
       </div>
       <nav className='header__nav_menu'>
         <div className="nav__button_container">
