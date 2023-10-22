@@ -8,6 +8,7 @@ import { Route, Routes,Navigate } from 'react-router-dom';
 import Auth from './pages/Auth';
 import Post from './pages/Post';
 import Posts from './pages/Posts';
+import About from './pages/About';
   
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/auth' element={<Auth />} />
         <Route path='/post' element={<Post />} />
         <Route path='/posts' element={<Posts />} />
+        <Route path='/About' element={<About />} />
         <Route path="*" element={<Navigate to="/home" />} />
       </Routes>
     <Footer />
