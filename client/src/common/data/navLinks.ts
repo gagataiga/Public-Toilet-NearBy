@@ -6,5 +6,4 @@ export const navLinks:NavLink[] = [
   { to: "/about", label: "About" },
   { to: "/auth", label: "Login" },
   { to: "/posts", label: "Posts" },
-  { to: "/logout", label: "Logout" },
 ];
