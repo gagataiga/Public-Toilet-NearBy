@@ -43,8 +43,6 @@ const Navigator = (props: NavigatorProps) => {
     dispatch(disableIsLoggedIn());
 
     return () => {
-      console.log('Component is unmounted!');
-
       if (userState.fb_uid) {
         dispatch(enableIsLoggedIn());
       }

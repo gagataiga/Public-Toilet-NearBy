@@ -52,10 +52,9 @@ export const authSlice = createSlice({
 export const userSignOut = () => { 
   return async (dispatch: Dispatch) => { 
     try {
-      const isSignOut = await (auth);
-      dispatch(clearUser)
-      console.log("Signout",isSignOut);
-      return isSignOut;
+      const isSignOut = await signOut(auth);
+      dispatch(clearUser());
+      return true;
     } catch(error) { 
       console.error(error)
       alert("user can not sign out")

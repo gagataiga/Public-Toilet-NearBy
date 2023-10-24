@@ -21,7 +21,7 @@ router.post("/",async (req:Request, res:Response) => {
     const result = await reviewsModel.insertReview(review);
     res.status(200).send("Review inserting is successful")
   } catch (error) {
-    console.log(error);
+    console.error(error);
     res.status(400).send("bad request");
   }
 })
