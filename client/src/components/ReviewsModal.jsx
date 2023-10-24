@@ -32,7 +32,6 @@ const ReviewsModal = (props) => {
 
   const handleRating = (e, newValue) => {
     if (newValue !== null) {
-      console.log(newValue);
       setRating(newValue)
     }
   };

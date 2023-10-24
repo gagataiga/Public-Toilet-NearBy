@@ -22,11 +22,9 @@ export const imageUploader = async (selectedFile: File): Promise<string | undefi
 
       // url to access to firebase storage
       const downLoadURL: string = await getDownloadURL(uploadedSnapshot.ref);
-      console.log("upload is successed");
       return downLoadURL;
     } catch (error) {
       console.error(error);
-      console.log("upload is not successed");
     }
   }
 

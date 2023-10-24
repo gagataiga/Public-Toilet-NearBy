@@ -2,7 +2,7 @@ import { createSlice , PayloadAction } from "@reduxjs/toolkit";
 import { initialState } from "./state";
 import { Dispatch } from "redux";
 import { User } from "./types";
-import { createUserWithEmailAndPassword , signInWithEmailAndPassword,} from "firebase/auth";
+import { createUserWithEmailAndPassword , signInWithEmailAndPassword, signOut} from "firebase/auth";
 import { auth } from "../firebase.conf";
 import { register } from "../api/userService";
 import { UserInfo } from "../common/types";
@@ -48,6 +48,19 @@ export const authSlice = createSlice({
   }
 });
 
+
+export const userSignOut = () => { 
+  return async (dispatch: Dispatch) => { 
+    try {
+      const isSignOut = await signOut(auth);
+      dispatch(clearUser());
+      return true;
+    } catch(error) { 
+      console.error(error)
+      alert("user can not sign out")
+    }
+  }
+}
 
 export const signIn = (email: string, password: string) => { 
   return async (dispatch: Dispatch) => { 
@@ -95,12 +108,7 @@ export const signUp = (email: string, password: string, userName: string) => {
   }
 }
 
-export const signOut = () => { 
-
-}
-
-
-export const { setUserAuth , enableIsLoggedIn, disableIsLoggedIn} = authSlice.actions;
+export const { setUserAuth , enableIsLoggedIn, disableIsLoggedIn, clearUser} = authSlice.actions;
 
 export default authSlice.reducer;
 
