@@ -85,10 +85,27 @@ The purpose behind creating this service stems from my personal experiences duri
 - Users can review their own posts on the 'Posts' page. Additionally, they can also check reviews for each of their posts.
 
 
-
 <br/>
 
 
+## Future Features 
+- Allow users to delete their posts.
+
+- Enable users to edit their posts or reviews.
+  
+- Use an API that provides information on department stores and nearby convenience stores where restrooms are likely to be found, and actually display them on a map.
+  
+- Add additional facilities information.
+  
+- Implement a navigation feature.
+  
+- Deploy the application on a different cloud service due to slow rendering on render.com. AWS or GCP.
+
+- Add testing capabilities.
+  
+- Integrate Docker into the project.
+
+<br/>
 
 ## License
 
