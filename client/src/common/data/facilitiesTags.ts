@@ -1,2 +1,2 @@
 
-export const facilities: string[] = ['Men', 'Women', 'Handicap-Accessible', 'Baby']; 
+export const facilities: string[] = ['Men', 'Women', 'Handicap-Accessible', 'Changing-Station']; 

@@ -28,7 +28,6 @@ export const setUpServer = () => {
   app.use("/reviews", reviewsRouter);
 
   app.get('/*', (req: Request, res: Response) => {
-    console.log(__dirname);
     res.sendFile(path.join(__dirname, '../../client/build', 'index.html'));
   });
   

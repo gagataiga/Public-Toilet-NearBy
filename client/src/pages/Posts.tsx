@@ -14,7 +14,6 @@ const Posts = () => {
       setUserPosts([]);
     } else {
       const response = await getUserPostById(userState.uid);
-      console.log(response);
       setUserPosts(response);
     }
   }

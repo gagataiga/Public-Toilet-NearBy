@@ -30,7 +30,6 @@ const Navigator = (props: NavigatorProps) => {
     let isCloseToNext = checkDistance(from, to);
     // user current location is close to the point 
     if (isCloseToNext) {
-      console.log("user is close to the next step");
       setSteps(steps.filter((step, index) => {
         return index !== 0;
       }));

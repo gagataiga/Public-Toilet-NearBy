@@ -1,7 +1,7 @@
 export const aboutPageTitleAndArticles:{title:string, article:string}[]= [
   {
     title: "What Is This App",
-    article: " Public-Toilet-Nearby is a service that allows you to find nearby public toilets,regardless of whether they are free or paid. You can choose a toilet you want to visit from your current location and even get directions, ensuring you can easily find a restroom without getting lost."
+    article: "Public-Toilet-Nearby is a service that allows you to find nearby public toilets,regardless of whether they are free or paid. You can choose a toilet you want to visit from your current location and even get directions, ensuring you can easily find a restroom without getting lost."
   },
   {
     title: "The Services Provided by This App" ,

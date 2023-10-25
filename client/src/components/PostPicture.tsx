@@ -10,8 +10,6 @@ const PostPicture = ({image,setImage}:PostPictureProps) => {
   >("");
 
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    console.log("choopse file");
-    
     const file = e.target.files;
     if (file && file[0]) {
       const objecUrl = URL.createObjectURL(file[0]);
