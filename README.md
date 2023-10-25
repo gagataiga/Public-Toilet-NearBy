@@ -77,6 +77,11 @@ The purpose behind creating this service stems from my personal experiences duri
 - Users can navigate to their desired pages by selecting the menu and transitioning to the page they want.
 
 
+#### Confirmation of Own Posts:
+- Users can review their own posts on the 'Posts' page. Additionally, they can also check reviews for each of their posts.
+
+
+
 <br/>
 
 
