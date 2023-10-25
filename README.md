@@ -21,12 +21,14 @@ https://github.com/gagataiga/Public-Toilet-NearBy/assets/67191126/df0df205-43db-
 
 
 ## Description
+Public-Toilet-Nearby is a service that allows you to find nearby public toilets, regardless of whether they are free or paid. You can choose a toilet you want to visit from your current location and even get directions, ensuring you can easily find a restroom without getting lost.
 
-Public-Toilet-Nearby is a service that allows you to find nearby public toilets,regardless of whether they are free or paid. You can choose a toilet you want to visit from your current location and even get directions, ensuring you can easily find a restroom without getting lost.
+<br/>
+"This app has been deployed, but I'm currently considering where to deploy it, especially since it's taking a long time to render.　Also, due to the low number of posts, toilets may not actually be displayed in your area."
 
 <br/>
 
-## Why I wanted to create this app?
+## Why do I want to create this app?
 
 The purpose behind creating this service stems from my personal experiences during my time living abroad. I found it incredibly challenging to locate restrooms, and I often felt the lack of services helping me find available restroom facilities.
 
@@ -60,7 +62,7 @@ The purpose behind creating this service stems from my personal experiences duri
 - Allow users to sign in and sign out securely, ensuring authentication protocols are in place.
 
 #### Create New Posts:
-- Enable users to compose detailed posts, including text, image file, ratings, facilities, and location information.
+- Enable users to compose detailed posts, including text, an image file, ratings, facilities, and location information.
  
 #### Create Reviews:
 - Allow users to create reviews for posts made by other users, fostering a sense of community interaction and feedback.
@@ -101,9 +103,9 @@ The purpose behind creating this service stems from my personal experiences duri
   
 - Deploy the application on a different cloud service due to slow rendering on render.com. AWS or GCP.
 
-- Add testing capabilities.
+- Add tests with Jest jest and cypress.
   
-- Integrate Docker into the project.
+- Use Docker in the project and deploy with it.
 
 <br/>
 
