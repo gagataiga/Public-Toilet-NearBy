@@ -13,9 +13,10 @@
 
 .header__item_title{
   margin-left: 10px;
+  font-size: 0.7em;
 }
 
-.heaer__item_link{
+.header__item_link{
   color: black;
 }
 
