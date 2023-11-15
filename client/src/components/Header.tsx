@@ -15,7 +15,7 @@ function Header() {
   const navigate = useNavigate();
   const userState = useAppSelector(state => state.user);
 
-  const toggelNavBar = () => { 
+  const toggleNavBar = () => { 
     setIsOpen(!isOpen);
   }
 
@@ -44,17 +44,17 @@ function Header() {
   return (
     <header className='header'>
       <div className='header__item_title'>
-          <Link to="/"><h2 className='heaer__item_link' onClick={closedNavBar}>Public-Toilet-NearBy</h2></Link>
+          <Link to="/"><h1 className='header__item_link' onClick={closedNavBar}>Public-Toilet-NearBy</h1></Link>
       </div>
       <nav className='header__nav_menu'>
         <div className="nav__button_container">
-          <MenuIcon onClick={toggelNavBar} className='nav__button' />
+          <MenuIcon onClick={toggleNavBar} className='nav__button' />
         </div>
         <div className={`nav__items_container ${(isOpen && !openLogout) ? "open" : ""}`}>
           <ul className='nav__items'>
             {navLinks.map((link: NavLink, index: number) => {
               return (
-                <li className='nav__item' key={index}><Link to={link.to} className='nav__item_link' onClick={toggelNavBar}>{link.label}</Link></li>
+                <li className='nav__item' key={index}><Link to={link.to} className='nav__item_link' onClick={toggleNavBar}>{link.label}</Link></li>
               )
             })}
             {userState.isLoggedIn && (
