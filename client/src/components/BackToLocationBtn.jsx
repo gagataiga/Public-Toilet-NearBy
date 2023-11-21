@@ -15,7 +15,7 @@ const BackToLocationBtn = () => {
   return (
     <div>
       <button className='user-location-btn'>
-        <img  id="user-location-img" src={userLocationBtn} alt="userlocationBtn-img" onClick={handleBackToLocation}/>
+        <img  id="user-location-img" src={userLocationBtn} alt="user-location-img" onClick={handleBackToLocation}/>
       </button>
     </div>
   )

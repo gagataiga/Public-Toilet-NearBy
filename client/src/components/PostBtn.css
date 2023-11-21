@@ -6,8 +6,15 @@
 }
 
 #post-btn{
-  height: 40px;
-  width: 60px;
-  background-color: #a8c0e8;
+  height: 65px;
+  width: 65px;
+  background-color: #ffffff;
   border-radius: 25px;
+  box-shadow: 1px 1px 3px black;
 }
+
+#post-img{
+  height: 40px;
+  width: 40px;
+}
+
