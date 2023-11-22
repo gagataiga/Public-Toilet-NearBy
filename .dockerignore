@@ -1,0 +1,7 @@
+# not include
+node_modules/
+client/
+Dockerfile
+LICENSE
+README.md
+.env.example

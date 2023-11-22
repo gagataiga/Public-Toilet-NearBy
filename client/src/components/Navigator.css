@@ -1,0 +1,26 @@
+.navigator_conrainer{
+  position: absolute;
+  top: 0%;
+  right: 0%;
+  background-color: white;
+  z-index: 900;
+  border-radius: 10px;
+  box-shadow: 1px 1px 3px #2f2f2f ;
+  border: 1px solid rgb(111, 111, 111);
+  font-size: 15px ;
+  font-weight: large;
+  text-align: center;
+  margin: 5px;
+}
+
+/* .dur-dis_conrainer{
+ 
+} */
+
+.nav_step{
+  border: 1px solid black;
+}
+
+.nav_step:nth-child(n + 3){
+  display: none;
+}

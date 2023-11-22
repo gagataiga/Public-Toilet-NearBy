@@ -1,0 +1,43 @@
+.about{
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  width: 100%;
+}
+
+.about__container{
+  width: 90%;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 0px 5px rgb(114, 112, 112);
+  border-radius: 5px;
+  text-align: center;
+  position: fixed;
+  top: 100px;
+  bottom: 65px;
+  overflow-y: auto;
+  margin: auto;
+  max-width: 800px;
+}
+
+.about__article_card{
+  margin: auto;
+  width: 85%;
+  max-width: 500px;
+  box-shadow: 0px 0px 5px rgb(116, 116, 116);
+  padding: 10px;
+}
+
+.about__article{
+  line-height:  1.5em;
+  letter-spacing: 1px;
+}
+
+.about-article__container{
+  margin-top: 40px;
+  margin-bottom: 20px;
+}
+
+.link__container{
+  margin: 10px;
+  font-size: x-large;
+}
