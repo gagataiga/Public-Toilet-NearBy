@@ -12,7 +12,7 @@ require("dotenv").config(); // .envファイルを読み込む
 export const setUpServer = () => { 
   const app = express();
   // app.use(cors({
-  //   origin: process.env.WEB_SERVER_URL, // reaxt app origin
+  //   origin: process.env.WEB_SERVER_URL, // app origin
   //   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE', // http method
   //   credentials: true, // auth info
   //   optionsSuccessStatus: 204, // status

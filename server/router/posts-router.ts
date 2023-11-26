@@ -36,4 +36,18 @@ router.get("/", async (req: Request, res: Response) => {
   }
 });
 
+router.delete("/:userId/:postId", async (req: Request, res: Response) => {
+  const userId = req.params.userId;
+  const postId = req.params.postId;
+
+  try {
+    const response = await postsModel.deleteUserPost(userId, postId);
+    res.status(200).send("user post was deleted successfully");
+  } catch (error) {
+    res.status(400).send("bad request");
+    console.error(error);
+  }
+
+});
+
 module.exports = router;

@@ -56,7 +56,25 @@ const config: { [key: string]: Knex.Config } = {
     seeds: {
       directory: __dirname + "/db/seeds",
     }
-  }
+  },
+
+  test: {
+    client: "pg",
+    connection: {
+      host: process.env.DB_HOST || "127.0.0.1",
+      port: PORT,
+      database: process.env.DB_TEST_NAME,
+      user: process.env.DB_USER,
+      password: process.env.DB_PASSWORD,
+    },
+    migrations: { 
+      tableName: 'knex_migrations',
+      directory: __dirname + "/db/migrations",
+    },
+    seeds: {
+      directory: __dirname + "/db/seeds",
+    }
+  },
 
 };
 
