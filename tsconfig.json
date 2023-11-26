@@ -109,5 +109,8 @@
   "scripts": {
     "compile": "tsc"
   },
-  "include": ["./server/**/*", "./db/**/*", "./knexfile.ts"]
+  "include": ["./server/**/*", "./db/**/*", "./knexfile.ts"],
+  "exclude": [
+    "./server/_test_/"
+  ]
 }
