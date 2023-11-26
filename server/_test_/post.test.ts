@@ -6,11 +6,21 @@ import { setUpServer } from "../setupServer";
 let app = setUpServer();
 
 before(() => {
-  app = setUpServer();
+  const PORT: number = 3001;
+  app =  app.listen(PORT, () => {
+    console.log(`The server is listening @ http://localhost:${PORT}`);
+  });
+  
 });
 
 after((done) => {
-  done();
+  app.close((err:Error) => {
+    if (err) {
+      console.error(err);
+    }
+    // test is done 
+    done();
+  });
 });
 
 chai.use(chaiHttp);

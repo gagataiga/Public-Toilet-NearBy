@@ -74,5 +74,16 @@ module.exports = {
       console.error(error);
       throw error;
     }
+  },
+  async deleteUserPost(userId:number, postId:number) { 
+    try {
+      const response = await postsKnex(POSTS_TABLE)
+        .where({user_id: userId,post_id: postId})
+        .del()
+      return response;
+    } catch (error) {
+      console.log(error);
+      throw error;
+    }
   }
 }
